@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: self_update - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP77.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/self_update.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\program\self_update\self_update.cpp"
+"F:\program\self_update\self_updateDlg.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP77.tmp" 
+Creating command line "link.exe /nologo /subsystem:windows /incremental:yes /pdb:"Debug/self_update.pdb" /debug /machine:I386 /out:"Debug/self_update.exe" /pdbtype:sept  .\Debug\self_update.obj .\Debug\self_updateDlg.obj .\Debug\StdAfx.obj .\Debug\self_update.res "
+<h3>Output Window</h3>
+Compiling...
+Skipping... (no relevant changes detected)
+self_update.cpp
+self_updateDlg.cpp
+Linking...
+Creating command line "bscmake.exe /nologo /o"Debug/self_update.bsc"  .\Debug\StdAfx.sbr .\Debug\self_update.sbr .\Debug\self_updateDlg.sbr"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+self_update.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
