@@ -1,0 +1,15 @@
+LIBRARY PEplugin
+EXPORTS
+Rva2MemAdr
+Rva2Raw
+Raw2Rva
+LoadFile
+GetPEFileSize
+UnLoadFile
+IsPEFile
+GetPEInfo
+AddSection
+SetTLS
+SetImport
+SetReLocation
+SaveFile
