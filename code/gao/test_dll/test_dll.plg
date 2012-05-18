@@ -6,18 +6,6 @@
 --------------------Configuration: test_dll - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP4A8.tmp" with contents
-[
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/test_dll.pdb" /debug /machine:I386 /out:"Debug/test_dll.exe" /pdbtype:sept 
-".\Debug\DLLINFO.obj"
-".\Debug\StdAfx.obj"
-".\Debug\test_dll.obj"
-".\Debug\test_dllDlg.obj"
-".\Debug\test_dll.res"
-]
-Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP4A8.tmp"
-<h3>Output Window</h3>
-Linking...
 
 
 

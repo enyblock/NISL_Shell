@@ -21,17 +21,6 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 
-/*定义dll infor结构体*/
-/*限定：
- *      1.模块数不超过40
- *      2.模块名字不超过20
- */
-typedef struct _dll_info{
-	
-	char dll_name[40][20];
-	int  num;
-	
-}DLL_INFO;
 
 
 //{{AFX_INSERT_LOCATION}}

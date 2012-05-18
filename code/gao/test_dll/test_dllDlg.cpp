@@ -5,6 +5,7 @@
 #include "test_dll.h"
 #include "test_dllDlg.h"
 
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -245,14 +246,18 @@ void CTest_dllDlg::OnButton4()
 {
 	// TODO: Add your control notification handler code here
 	
+	
 	m_dll_info.GetDllName();
+	
+	/*Çå¿Õlistbox*/
+	m_CheckListBox.ResetContent();
 		
 	int i = 0;
 	while (i < m_dll_info.m_df_dll_info.num)
 		m_CheckListBox.AddString(_T(m_dll_info.m_df_dll_info.dll_name[i++]));
 	
-
-
+	
+	m_dll_info.GetDLLInformation();
 
 
 }
