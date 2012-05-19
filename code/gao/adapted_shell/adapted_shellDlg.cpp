@@ -90,6 +90,7 @@ BEGIN_MESSAGE_MAP(CAdapted_shellDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, OnUpdate)
 	ON_WM_DROPFILES()
 	ON_BN_CLICKED(IDC_BUTTON2, OnOpenFile)
+	ON_BN_CLICKED(IDC_BUTTON4, OnAddDll)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -118,7 +119,7 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	m_tabctrl.GetClientRect(rc);
 	rc.top += 20;
 	rc.bottom -= 8;
-	rc.left += 8;
+	rc.left +=3;
 	rc.right -= 8;
 
 	m_tabpage1.MoveWindow(&rc);
@@ -466,6 +467,7 @@ void CAdapted_shellDlg::OnDropFiles(HDROP hDropInfo)
 
 
 /*打开文件对话框*/
+
 void CAdapted_shellDlg::OnOpenFile() 
 {
 	// TODO: Add your control notification handler code here
@@ -508,4 +510,13 @@ void CAdapted_shellDlg::OnOpenFile()
 
 		
     }
+}
+
+
+
+
+/*增加dll信息*/
+void CAdapted_shellDlg::OnAddDll()
+{
+	m_tabpage1.m_CheckListBox.AddString("hhe");
 }

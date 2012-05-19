@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAdapted_shellDlg
+LastClass=CAdapted_shellApp
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "adapted_shell.h"
@@ -13,9 +13,9 @@ Class2=CAdapted_shellDlg
 Class3=CAboutDlg
 
 ResourceCount=4
-Resource1=IDD_ADAPTED_SHELL_DIALOG
+Resource1=IDD_ABOUTBOX
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_ADAPTED_SHELL_DIALOG
 Class4=CTabPage
 Class5=CTabPage1
 Resource4=IDD_DIALOG_PAG
@@ -25,7 +25,9 @@ Type=0
 HeaderFile=adapted_shell.h
 ImplementationFile=adapted_shell.cpp
 Filter=N
-LastObject=CAdapted_shellApp
+LastObject=IDC_BUTTON4
+BaseClass=CWinApp
+VirtualFilter=AC
 
 [CLS:CAdapted_shellDlg]
 Type=0
@@ -64,7 +66,7 @@ Control5=IDC_BUTTON2,button,1342242816
 Control6=IDC_EDIT_OUT_FILE,edit,1350633600
 Control7=IDC_STATIC,static,1342308352
 Control8=IDC_STATIC,button,1342177287
-Control9=IDC_STATIC,button,1342177287
+Control9=IDC_BUTTON4,button,1342242816
 
 [CLS:CTabPage]
 Type=0
@@ -77,10 +79,11 @@ LastObject=CTabPage
 [DLG:IDD_DIALOG_PAG]
 Type=1
 Class=CTabPage1
-ControlCount=3
+ControlCount=4
 Control1=IDC_STATIC,button,1342177287
 Control2=IDC_BUTTON2,button,1342242816
 Control3=IDC_BUTTON3,button,1342242816
+Control4=IDC_LIST_DLL_BOX,listbox,1352728915
 
 [CLS:CTabPage1]
 Type=0
@@ -89,4 +92,5 @@ ImplementationFile=TabPage1.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=CTabPage1
+VirtualFilter=dWC
 

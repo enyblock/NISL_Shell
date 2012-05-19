@@ -15,6 +15,7 @@ class CTabPage1 : public CDialog
 // Construction
 public:
 	CTabPage1(CWnd* pParent = NULL);   // standard constructor
+	CCheckListBox m_CheckListBox;
 
 // Dialog Data
 	//{{AFX_DATA(CTabPage1)
@@ -35,7 +36,8 @@ protected:
 
 	// Generated message map functions
 	//{{AFX_MSG(CTabPage1)
-		// NOTE: the ClassWizard will add member functions here
+	virtual BOOL OnInitDialog();
+	afx_msg void OnCancle();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

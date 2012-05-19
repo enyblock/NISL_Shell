@@ -34,8 +34,7 @@ public:
 // Implementation
 
 	//{{AFX_MSG(CAdapted_shellApp)
-		// NOTE - the ClassWizard will add and remove member functions here.
-		//    DO NOT EDIT what you see in these blocks of generated code !
+//	afx_msg void OnAddDll();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

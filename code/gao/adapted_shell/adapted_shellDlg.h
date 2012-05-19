@@ -52,6 +52,7 @@ protected:
 	afx_msg void OnUpdate();
 	afx_msg void OnDropFiles(HDROP hDropInfo);
 	afx_msg void OnOpenFile();
+	afx_msg void OnAddDll();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
