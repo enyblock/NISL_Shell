@@ -13,6 +13,9 @@
 /////////////////////////////////////////////////////////////////////////////
 // CAdapted_shellDlg dialog
 
+#include "DLLINFO.h"
+
+
 class CAdapted_shellDlg : public CDialog
 {
 // Construction
@@ -20,18 +23,21 @@ public:
 	CAdapted_shellDlg(CWnd* pParent = NULL);	// standard constructor
 	bool Download(const CString& strFileURLInServer, const CString & strFileLocalFullPath);//存放到本地的路径 
 	BOOL PreTranslateMessage(MSG* pMsg);
-// Dialog Data
+    // Dialog Data
 	//{{AFX_DATA(CAdapted_shellDlg)
 	enum { IDD = IDD_ADAPTED_SHELL_DIALOG };
-	CTabCtrl	m_tabctrl;
-	CTabPage1   m_tabpage1;
-	CTabPage1   m_tabpage2;
-	CTabPage1   m_tabpage3;
-	int         m_CurSelTab;
-	CDialog     *pDialog[3];
-	
 
 	//}}AFX_DATA
+	/*tab control*/
+	CTabCtrl	m_tabctrl;
+	CTabPage1   m_tabpage[3];
+	int         m_CurSelTab;
+	CDialog     *pDialog[3];
+
+	/*dll information*/
+	DLLINFO     m_dll_info;
+
+
 
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CAdapted_shellDlg)
@@ -53,6 +59,8 @@ protected:
 	afx_msg void OnDropFiles(HDROP hDropInfo);
 	afx_msg void OnOpenFile();
 	afx_msg void OnAddDll();
+	afx_msg void OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnListDll();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

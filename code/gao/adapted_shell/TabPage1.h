@@ -38,6 +38,8 @@ protected:
 	//{{AFX_MSG(CTabPage1)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnCancle();
+	afx_msg void OnSelcancelListDllBox();
+	afx_msg void OnSelchangeListDllBox();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

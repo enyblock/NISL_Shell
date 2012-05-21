@@ -37,6 +37,8 @@ void CTabPage1::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CTabPage1, CDialog)
 	//{{AFX_MSG_MAP(CTabPage1)
 	ON_BN_CLICKED(IDC_BUTTON3, OnCancle)
+	ON_LBN_SELCANCEL(IDC_LIST_DLL_BOX, OnSelcancelListDllBox)
+	ON_LBN_SELCHANGE(IDC_LIST_DLL_BOX, OnSelchangeListDllBox)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -69,5 +71,25 @@ void CTabPage1::OnCancle()
 
 
 	
+	
+}
+
+void CTabPage1::OnSelcancelListDllBox() 
+{
+	// TODO: Add your control notification handler code here
+	CString strTemp;   
+	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
+	AfxMessageBox(strTemp);
+	
+}
+
+/*item选中相应*/
+void CTabPage1::OnSelchangeListDllBox() 
+{
+	// TODO: Add your control notification handler code here
+
+//	CString strTemp;   
+//	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
+//	AfxMessageBox(strTemp);
 	
 }

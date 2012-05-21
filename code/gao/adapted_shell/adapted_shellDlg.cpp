@@ -91,6 +91,8 @@ BEGIN_MESSAGE_MAP(CAdapted_shellDlg, CDialog)
 	ON_WM_DROPFILES()
 	ON_BN_CLICKED(IDC_BUTTON2, OnOpenFile)
 	ON_BN_CLICKED(IDC_BUTTON4, OnAddDll)
+	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, OnSelchangeTab1)
+	ON_BN_CLICKED(IDC_BUTTON5, OnListDll)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -105,14 +107,16 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	
 
 	//添加table
-	m_tabctrl.InsertItem(0,_T("modify"));
-	m_tabctrl.InsertItem(0,_T("encryption"));
 	m_tabctrl.InsertItem(0,_T("Table"));
+	m_tabctrl.InsertItem(0,_T("encryption"));
+	m_tabctrl.InsertItem(0,_T("modify"));
+
+
 	
 	//创建dialog
-	m_tabpage1.Create(IDD_DIALOG_PAG,&m_tabctrl);
-	m_tabpage2.Create(IDD_DIALOG_PAG,&m_tabctrl);
-	m_tabpage3.Create(IDD_DIALOG_PAG,&m_tabctrl);
+	m_tabpage[0].Create(IDD_DIALOG_PAG,&m_tabctrl);
+	m_tabpage[1].Create(IDD_DIALOG_PAG,&m_tabctrl);
+	m_tabpage[2].Create(IDD_DIALOG_PAG,&m_tabctrl);
 
 	//设定显示位置
 	CRect rc;
@@ -122,20 +126,24 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	rc.left +=3;
 	rc.right -= 8;
 
-	m_tabpage1.MoveWindow(&rc);
-	m_tabpage2.MoveWindow(&rc);
-	m_tabpage3.MoveWindow(&rc);
+	m_tabpage[0].MoveWindow(&rc);
+	m_tabpage[1].MoveWindow(&rc);
+	m_tabpage[2].MoveWindow(&rc);
 
 
 	//保存指针
-	pDialog[0] = &m_tabpage1;
-	pDialog[1] = &m_tabpage2;
-	pDialog[2] = &m_tabpage3;
+	pDialog[0] = &m_tabpage[0];
+	pDialog[1] = &m_tabpage[1];
+	pDialog[2] = &m_tabpage[2];
 
 	//显示界面
 	pDialog[0]->ShowWindow(SW_SHOW);
 	pDialog[1]->ShowWindow(SW_HIDE);
 	pDialog[2]->ShowWindow(SW_HIDE);
+
+
+	//默认第一页
+	m_tabctrl.SetCurSel(0); 
 
 
 	m_CurSelTab = 0;
@@ -518,5 +526,40 @@ void CAdapted_shellDlg::OnOpenFile()
 /*增加dll信息*/
 void CAdapted_shellDlg::OnAddDll()
 {
-	m_tabpage1.m_CheckListBox.AddString("hhe");
+	m_tabpage[0].m_CheckListBox.AddString("hhe");
+}
+
+void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	// TODO: Add your control notification handler code here
+
+	pDialog[m_CurSelTab]->ShowWindow(SW_HIDE);
+    m_CurSelTab = m_tabctrl.GetCurSel();
+    pDialog[m_CurSelTab]->ShowWindow(SW_SHOW);
+	
+	*pResult = 0;
+}
+
+void CAdapted_shellDlg::OnListDll() 
+{
+	// TODO: Add your control notification handler code here
+	m_dll_info.GetDllName();
+	
+	/*清空listbox*/
+	m_tabpage[0].m_CheckListBox.ResetContent();
+	m_tabpage[1].m_CheckListBox.ResetContent();
+	m_tabpage[2].m_CheckListBox.ResetContent();
+	
+
+
+	
+	m_dll_info.GetDLLInformation();
+
+
+	int i = 0;
+	while (i < m_dll_info.m_df_dll_info.num){
+		m_tabpage[m_dll_info.m_dll_common_info.dll_information[i].PluginType-1].m_CheckListBox.AddString(_T(m_dll_info.m_df_dll_info.dll_name[i]));
+	    i++;
+	}
+	
 }

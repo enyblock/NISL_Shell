@@ -18,6 +18,7 @@
 #define IDC_EDIT_OUT_FILE               1009
 #define IDC_LIST_DLL_BOX                1009
 #define IDC_BUTTON4                     1010
+#define IDC_BUTTON5                     1011
 
 // Next default values for new objects
 // 
