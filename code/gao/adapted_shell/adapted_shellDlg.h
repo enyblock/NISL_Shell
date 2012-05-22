@@ -28,7 +28,9 @@ public:
 	BOOL PreTranslateMessage(MSG* pMsg);
 	void Display_Dll_Input(CString _dll_name);
 	int  Return_Index_For_Dll_Name(CString _dll_name);
-	int  Set_Dll_Input_Dialog(int _index);
+	int  Set_Dll_Input_Dialog();
+	int  Show_Edit_And_Static(int limit,int i);
+	
     // Dialog Data
 	//{{AFX_DATA(CAdapted_shellDlg)
 	enum { IDD = IDD_ADAPTED_SHELL_DIALOG };

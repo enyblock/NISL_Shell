@@ -37,9 +37,9 @@ void CTabPage1::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CTabPage1, CDialog)
 	//{{AFX_MSG_MAP(CTabPage1)
-	ON_BN_CLICKED(IDC_BUTTON3, OnCancle)
 	ON_LBN_SELCANCEL(IDC_LIST_DLL_BOX, OnSelcancelListDllBox)
 	ON_LBN_SELCHANGE(IDC_LIST_DLL_BOX, OnSelchangeListDllBox)
+	ON_LBN_SETFOCUS(IDC_LIST_DLL_BOX, OnSetfocusListDllBox)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -61,19 +61,7 @@ BOOL CTabPage1::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CTabPage1::OnCancle() 
-{
-	// TODO: Add your control notification handler code here
-	EndDialog(NULL);
-	
-	m_CheckListBox.ResetContent();
 
-
-
-
-	
-	
-}
 
 void CTabPage1::OnSelcancelListDllBox() 
 {
@@ -95,4 +83,16 @@ void CTabPage1::OnSelchangeListDllBox()
 
 	m_main_dialog->Display_Dll_Input(strTemp);
 	
+}
+
+void CTabPage1::OnSetfocusListDllBox() 
+{
+	// TODO: Add your control notification handler code here
+
+	
+//	CString strTemp;   
+//	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
+
+//	AfxMessageBox(strTemp);
+//	
 }

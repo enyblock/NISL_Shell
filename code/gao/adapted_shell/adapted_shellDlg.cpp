@@ -182,6 +182,9 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	pDialog_input[0]->ShowWindow(SW_SHOW);
 
 
+
+
+
 //	GetDlgItem(IDC_EDIT2)->EnableWindow(TRUE); 
 
 
@@ -570,6 +573,10 @@ void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 	pDialog[m_CurSelTab]->ShowWindow(SW_HIDE);
     m_CurSelTab = m_tabctrl.GetCurSel();
     pDialog[m_CurSelTab]->ShowWindow(SW_SHOW);
+
+// 	CString strTemp;   
+// 	m_tabpage[m_CurSelTab].m_CheckListBox.GetText(m_tabpage[m_CurSelTab].m_CheckListBox.GetCurSel(),strTemp); 
+// 	AfxMessageBox(strTemp);
 	
 	*pResult = 0;
 }
@@ -596,9 +603,16 @@ void CAdapted_shellDlg::OnListDll()
 	    i++;
 	}
 
-
+	Set_Dll_Input_Dialog();
 	
 }
+
+
+/*
+ * 功能  ：通过DLL 名字显示dll input界面
+ * 日期  ：2012-5-22
+ * 作者  ：gaoxiang
+ */
 
 void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
 {
@@ -607,7 +621,7 @@ void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
 	
 	index = Return_Index_For_Dll_Name(_dll_name);
 
-	AfxMessageBox(_dll_name);
+//	AfxMessageBox(_dll_name);
 
 	while (i < m_dll_info.m_df_dll_info.num){
 		pDialog_input[i]->ShowWindow(SW_HIDE);
@@ -617,26 +631,381 @@ void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
 	pDialog_input[index]->ShowWindow(SW_SHOW);
 
 
-	Set_Dll_Input_Dialog(index);
+//	Set_Dll_Input_Dialog();
 
 }
-
-
 /*
- * 功能  ：通过索引值设定dll input界面
- * 参数	 ：dll 索引
+ * 功能  ：根据所需参数个数显示编辑框个数
  * 返回值：1 表示成功，0表示失败
  * 日期  ：2012-5-22
  * 作者  ：gaoxiang
  */
 
-int CAdapted_shellDlg::Set_Dll_Input_Dialog(int _index)
+int CAdapted_shellDlg::Show_Edit_And_Static(int limit,int i)
 {
+	switch(limit){
+		case 0:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
 
-//	pDialog_input[_index]->m_brief_introduction;
-//	AfxMessageBox(m_dll_info.m_dll_common_info.dll_information[_index].Cmd[m_dll_info.m_dll_common_info.dll_information[_index].CmdNum]);
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+				}break;
+		case 1:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+
+			   }break;
+		case 2:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+			   }break;
+		case 3:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+			   }break;
+		case 4:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+			   }break;
+		case 5:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));	
+			   }break;
+			
+		case 6:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC6,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[5]));
+			   }break;
+		case 7:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC6,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[5]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC7,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[6]));
+			   }break;
+		case 8:{
+				m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+				
+				m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(true);
+				m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(false);
+				m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+				
+				m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC6,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[5]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC7,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[6]));
+				m_dll_input[i].SetDlgItemText(IDC_STATIC8,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[7]));
+			   }break;
+		case 9:{
+			m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(false);
+			
+			m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(false);
+
+
+			m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC6,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[5]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC7,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[6]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC8,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[7]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC9,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[8]));
+			   }break;
+		case 10:{
+			m_dll_input[i].GetDlgItem(IDC_EDIT1)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT2)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT3)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT4)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT5)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT6)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT7)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT8)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT9)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_EDIT10)->ShowWindow(true);
+			
+			m_dll_input[i].GetDlgItem(IDC_STATIC1)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC2)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC3)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC4)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC5)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC6)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC7)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC8)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC9)->ShowWindow(true);
+			m_dll_input[i].GetDlgItem(IDC_STATIC10)->ShowWindow(true);
+
+			
+			m_dll_input[i].SetDlgItemText(IDC_STATIC1,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[0]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC2,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[1]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC3,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[2]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC4,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[3]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC5,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[4]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC6,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[5]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC7,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[6]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC8,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[7]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC9,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[8]));
+			m_dll_input[i].SetDlgItemText(IDC_STATIC10,_T(m_dll_info.m_dll_common_info.dll_information[i].CmdStr[9]));
+			   }break;
+	default:;
+	}
 
 	return 1;
+}
+
+/*
+ * 功能  ：通过索引值设定dll input界面
+ * 返回值：1 表示成功，0表示失败
+ * 日期  ：2012-5-22
+ * 作者  ：gaoxiang
+ */
+
+int CAdapted_shellDlg::Set_Dll_Input_Dialog()
+{
+
+	char str[CMD_NAME];
+	int  i = 0;
+
+
+	while (i < m_dll_info.m_df_dll_info.num){
+
+		/*拷贝数据*/
+		strcpy(str,m_dll_info.m_dll_common_info.dll_information[i].CmdStr[m_dll_info.m_dll_common_info.dll_information[i].CmdNum]);
+
+
+		m_dll_input[i].SetDlgItemText(IDC_STATIC_BRIEF,_T(str));
+		m_dll_input[i].SetDlgItemText(IDC_STATIC_DLL_NAME,_T(m_dll_info.m_df_dll_info.dll_name[i]));
+		Show_Edit_And_Static(m_dll_info.m_dll_common_info.dll_information[i].CmdNum,i);
+		i++;
+	}
+	return (i == m_dll_info.m_df_dll_info.num);
 }
 
 

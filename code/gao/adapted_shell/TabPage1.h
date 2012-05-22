@@ -47,9 +47,9 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CTabPage1)
 	virtual BOOL OnInitDialog();
-	afx_msg void OnCancle();
 	afx_msg void OnSelcancelListDllBox();
 	afx_msg void OnSelchangeListDllBox();
+	afx_msg void OnSetfocusListDllBox();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

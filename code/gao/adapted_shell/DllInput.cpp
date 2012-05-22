@@ -19,7 +19,7 @@ CDllInput::CDllInput(CWnd* pParent /*=NULL*/)
 	: CDialog(CDllInput::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CDllInput)
-	m_brief_introduction = _T("");
+	m_edit1 = _T("");
 	//}}AFX_DATA_INIT
 }
 
@@ -28,7 +28,7 @@ void CDllInput::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDllInput)
-	DDX_Text(pDX, IDC_EDIT1, m_brief_introduction);
+	DDX_Text(pDX, IDC_EDIT1, m_edit1);
 	//}}AFX_DATA_MAP
 }
 

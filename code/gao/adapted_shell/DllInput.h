@@ -15,11 +15,11 @@ class CDllInput : public CDialog
 // Construction
 public:
 	CDllInput(CWnd* pParent = NULL);   // standard constructor
-
+//	CString	m_brief;
 // Dialog Data
 	//{{AFX_DATA(CDllInput)
 	enum { IDD = IDD_DLL_INPUT };
-	CString	m_brief_introduction;
+	CString	m_edit1;
 	//}}AFX_DATA
 
 
