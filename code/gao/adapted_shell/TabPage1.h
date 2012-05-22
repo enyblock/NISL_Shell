@@ -10,12 +10,22 @@
 /////////////////////////////////////////////////////////////////////////////
 // CTabPage1 dialog
 
+
+
+
+
+#define  WM_MY_MESSAGE  5000
+
+class CAdapted_shellDlg;
+
+
 class CTabPage1 : public CDialog
 {
 // Construction
 public:
 	CTabPage1(CWnd* pParent = NULL);   // standard constructor
 	CCheckListBox m_CheckListBox;
+	CAdapted_shellDlg *m_main_dialog;
 
 // Dialog Data
 	//{{AFX_DATA(CTabPage1)

@@ -85,6 +85,7 @@ public:
 	DLLINFO();
 	int    GetDllName(void);
 	int    GetDLLInformation(void);
+	int    GetIndexFromDllName(char _dll_name[DLL_NUM]);
 	virtual ~DLLINFO();
 
 public:

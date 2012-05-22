@@ -14,6 +14,9 @@
 // CAdapted_shellDlg dialog
 
 #include "DLLINFO.h"
+#include "DllInput.h"
+
+
 
 
 class CAdapted_shellDlg : public CDialog
@@ -23,19 +26,30 @@ public:
 	CAdapted_shellDlg(CWnd* pParent = NULL);	// standard constructor
 	bool Download(const CString& strFileURLInServer, const CString & strFileLocalFullPath);//存放到本地的路径 
 	BOOL PreTranslateMessage(MSG* pMsg);
+	void Display_Dll_Input(CString _dll_name);
+	int  Return_Index_For_Dll_Name(CString _dll_name);
+	int  Set_Dll_Input_Dialog(int _index);
     // Dialog Data
 	//{{AFX_DATA(CAdapted_shellDlg)
 	enum { IDD = IDD_ADAPTED_SHELL_DIALOG };
 
 	//}}AFX_DATA
+
 	/*tab control*/
 	CTabCtrl	m_tabctrl;
 	CTabPage1   m_tabpage[3];
 	int         m_CurSelTab;
 	CDialog     *pDialog[3];
-
+	
 	/*dll information*/
 	DLLINFO     m_dll_info;
+	
+	
+	/*dll input*/
+	CDllInput   m_dll_input[DLL_NUM];
+	CDialog     *pDialog_input[DLL_NUM];
+
+
 
 
 

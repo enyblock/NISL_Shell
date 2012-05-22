@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "adapted_shell.h"
 #include "TabPage1.h"
+#include "adapted_shellDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // CTabPage1 dialog
 
 
-CTabPage1::CTabPage1(CWnd* pParent /*=NULL*/)
+CTabPage1::CTabPage1(CWnd* pParent)
 	: CDialog(CTabPage1::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CTabPage1)
@@ -88,8 +89,10 @@ void CTabPage1::OnSelchangeListDllBox()
 {
 	// TODO: Add your control notification handler code here
 
-//	CString strTemp;   
-//	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
-//	AfxMessageBox(strTemp);
+	CString strTemp;   
+	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
+
+
+	m_main_dialog->Display_Dll_Input(strTemp);
 	
 }

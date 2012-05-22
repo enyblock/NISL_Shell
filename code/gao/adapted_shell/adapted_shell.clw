@@ -2,23 +2,25 @@
 
 [General Info]
 Version=1
-LastClass=CAdapted_shellDlg
+LastClass=CDllInput
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "adapted_shell.h"
 
-ClassCount=5
+ClassCount=6
 Class1=CAdapted_shellApp
 Class2=CAdapted_shellDlg
 Class3=CAboutDlg
 
-ResourceCount=4
-Resource1=IDD_ADAPTED_SHELL_DIALOG
+ResourceCount=5
+Resource1=IDD_DIALOG_PAG
 Resource2=IDR_MAINFRAME
 Resource3=IDD_ABOUTBOX
 Class4=CTabPage
 Class5=CTabPage1
-Resource4=IDD_DIALOG_PAG
+Resource4=IDD_ADAPTED_SHELL_DIALOG
+Class6=CDllInput
+Resource5=IDD_DLL_INPUT
 
 [CLS:CAdapted_shellApp]
 Type=0
@@ -36,7 +38,7 @@ ImplementationFile=adapted_shellDlg.cpp
 Filter=W
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=IDC_TAB1
+LastObject=CAdapted_shellDlg
 
 [CLS:CAboutDlg]
 Type=0
@@ -80,11 +82,9 @@ LastObject=CTabPage
 [DLG:IDD_DIALOG_PAG]
 Type=1
 Class=CTabPage1
-ControlCount=4
+ControlCount=2
 Control1=IDC_STATIC,button,1342177287
-Control2=IDC_BUTTON2,button,1342242816
-Control3=IDC_BUTTON3,button,1342242816
-Control4=IDC_LIST_DLL_BOX,listbox,1352728659
+Control2=IDC_LIST_DLL_BOX,listbox,1352728659
 
 [CLS:CTabPage1]
 Type=0
@@ -93,5 +93,41 @@ ImplementationFile=TabPage1.cpp
 BaseClass=CDialog
 Filter=D
 LastObject=IDC_LIST_DLL_BOX
+VirtualFilter=dWC
+
+[DLG:IDD_DLL_INPUT]
+Type=1
+Class=CDllInput
+ControlCount=22
+Control1=IDC_STATIC,button,1342177287
+Control2=IDC_STATIC,button,1342177287
+Control3=IDC_STATIC1,static,1342308352
+Control4=IDC_EDIT1,edit,1350631552
+Control5=IDC_STATIC2,static,1342308352
+Control6=IDC_EDIT2,edit,1350631552
+Control7=IDC_STATIC3,static,1342308352
+Control8=IDC_EDIT3,edit,1350631552
+Control9=IDC_STATIC4,static,1342308352
+Control10=IDC_EDIT4,edit,1350631552
+Control11=IDC_STATIC5,static,1342308352
+Control12=IDC_EDIT5,edit,1350631552
+Control13=IDC_STATIC6,static,1342308352
+Control14=IDC_EDIT6,edit,1350631552
+Control15=IDC_STATIC7,static,1342308352
+Control16=IDC_EDIT7,edit,1350631552
+Control17=IDC_STATIC8,static,1342308352
+Control18=IDC_EDIT8,edit,1350631552
+Control19=IDC_STATIC9,static,1342308352
+Control20=IDC_EDIT9,edit,1350631552
+Control21=IDC_STATIC10,static,1342308352
+Control22=IDC_EDIT10,edit,1350631552
+
+[CLS:CDllInput]
+Type=0
+HeaderFile=DllInput.h
+ImplementationFile=DllInput.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CDllInput
 VirtualFilter=dWC
 

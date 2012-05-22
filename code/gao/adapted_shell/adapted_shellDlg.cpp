@@ -104,7 +104,8 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	// Add "About..." menu item to system menu.
-	
+
+//	h_dlgmain = this->m_hWnd;
 
 	//添加table
 	m_tabctrl.InsertItem(0,_T("Table"));
@@ -114,17 +115,27 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 
 	
 	//创建dialog
-	m_tabpage[0].Create(IDD_DIALOG_PAG,&m_tabctrl);
-	m_tabpage[1].Create(IDD_DIALOG_PAG,&m_tabctrl);
-	m_tabpage[2].Create(IDD_DIALOG_PAG,&m_tabctrl);
+ 	m_tabpage[0].Create(IDD_DIALOG_PAG,&m_tabctrl);
+ 	m_tabpage[1].Create(IDD_DIALOG_PAG,&m_tabctrl);
+ 	m_tabpage[2].Create(IDD_DIALOG_PAG,&m_tabctrl);
 
-	//设定显示位置
+
+	m_tabpage[0].m_main_dialog = this;
+	m_tabpage[1].m_main_dialog = this;
+	m_tabpage[2].m_main_dialog = this;
+
+
+	
+
+
+
+	//设定module list显示位置
 	CRect rc;
 	m_tabctrl.GetClientRect(rc);
 	rc.top += 20;
 	rc.bottom -= 8;
 	rc.left +=3;
-	rc.right -= 8;
+	rc.right -= 350;
 
 	m_tabpage[0].MoveWindow(&rc);
 	m_tabpage[1].MoveWindow(&rc);
@@ -149,6 +160,29 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	m_CurSelTab = 0;
 
 
+	//设定dll input显示位置
+	CRect rc1;
+	m_tabctrl.GetClientRect(rc1);
+	rc1.top += 20;
+	rc1.bottom -= 8;
+	rc1.left +=220;
+	rc1.right -= 8;
+	
+	int i = 0;
+	while(i < DLL_NUM){
+		//创建dialog
+		m_dll_input[i].Create(IDD_DLL_INPUT,&m_tabctrl);
+		m_dll_input[i].MoveWindow(&rc1);
+		pDialog_input[i] = &m_dll_input[i];
+		pDialog_input[i]->ShowWindow(SW_HIDE);
+		i++;
+	}
+
+
+	pDialog_input[0]->ShowWindow(SW_SHOW);
+
+
+//	GetDlgItem(IDC_EDIT2)->EnableWindow(TRUE); 
 
 
 
@@ -561,5 +595,76 @@ void CAdapted_shellDlg::OnListDll()
 		m_tabpage[m_dll_info.m_dll_common_info.dll_information[i].PluginType-1].m_CheckListBox.AddString(_T(m_dll_info.m_df_dll_info.dll_name[i]));
 	    i++;
 	}
+
+
 	
 }
+
+void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
+{
+	int index = 0;
+	int i = 0;
+	
+	index = Return_Index_For_Dll_Name(_dll_name);
+
+	AfxMessageBox(_dll_name);
+
+	while (i < m_dll_info.m_df_dll_info.num){
+		pDialog_input[i]->ShowWindow(SW_HIDE);
+		i++;
+	}
+	
+	pDialog_input[index]->ShowWindow(SW_SHOW);
+
+
+	Set_Dll_Input_Dialog(index);
+
+}
+
+
+/*
+ * 功能  ：通过索引值设定dll input界面
+ * 参数	 ：dll 索引
+ * 返回值：1 表示成功，0表示失败
+ * 日期  ：2012-5-22
+ * 作者  ：gaoxiang
+ */
+
+int CAdapted_shellDlg::Set_Dll_Input_Dialog(int _index)
+{
+
+//	pDialog_input[_index]->m_brief_introduction;
+//	AfxMessageBox(m_dll_info.m_dll_common_info.dll_information[_index].Cmd[m_dll_info.m_dll_common_info.dll_information[_index].CmdNum]);
+
+	return 1;
+}
+
+
+
+/*
+ * 功能  ：返回dll名字对应dll_infor的索引值
+ * 参数	 ：dll名字
+ * 返回值：-1 表示查找失败，其他值为找到dll的索引值
+ * 日期  ：2012-5-22
+ * 作者  ：gaoxiang
+ */
+
+int CAdapted_shellDlg::Return_Index_For_Dll_Name(CString _dll_name)
+{
+
+	int  i = 0;
+
+	while(i < m_dll_info.m_df_dll_info.num){
+		
+		if (!strcmp(_dll_name,m_dll_info.m_df_dll_info.dll_name[i]))
+		{
+			return i;
+		}
+
+		i++;
+	}
+	
+	return -1;
+
+}
+

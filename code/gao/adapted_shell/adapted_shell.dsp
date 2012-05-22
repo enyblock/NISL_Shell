@@ -106,6 +106,10 @@ SOURCE=.\DLLINFO.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DllInput.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
@@ -128,6 +132,10 @@ SOURCE=.\adapted_shellDlg.h
 # Begin Source File
 
 SOURCE=.\DLLINFO.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DllInput.h
 # End Source File
 # Begin Source File
 

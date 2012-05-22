@@ -35,6 +35,8 @@ int DLLINFO::GetDllName(void)
 	if (num == 1)
 	{
 		AfxMessageBox("list success");
+	}else{
+		AfxMessageBox("list faile");
 	}
 	
 	FreeLibrary(hDLL);
@@ -98,7 +100,7 @@ int DLLINFO::GetDLLInformation(void)
 		strPath += "\\";
 		strPath += m_df_dll_info.dll_name[i];
 
-		AfxMessageBox(strPath);
+	//	AfxMessageBox(strPath);
 
 		hDLL = NULL;
 		fun  = NULL;
@@ -127,7 +129,9 @@ int DLLINFO::GetDLLInformation(void)
 		
 		if (num)
 		{
-			AfxMessageBox("call dll success");
+			//AfxMessageBox("call dll success");
+		}else{
+			AfxMessageBox("call dll faile");
 		}
 
 		i++;
@@ -153,10 +157,32 @@ int DLLINFO::GetDLLInformation(void)
 	}else{
 
 		
-		AfxMessageBox("list success");
+	//	AfxMessageBox("list success");
 		return 1;
 	}
 
 	
 	
+}
+
+
+
+/*
+ *　功能  ： 通过dll名字，获取dll的索引号
+ *　返回值： -1 表示没有找到，其余的值为找到的索引值
+ *　日期  ： 2012-5-21
+ *  作者  ： 高向
+ */
+int DLLINFO::GetIndexFromDllName(char _dll_name[DLL_NUM])
+{
+	int i = 0;
+
+	while (i < m_df_dll_info.num){
+		if (strcmp(_dll_name,m_df_dll_info.dll_name[i]))
+			return i;
+		
+		i++;
+	}
+
+	return -1;
 }
