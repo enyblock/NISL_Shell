@@ -82,7 +82,7 @@ EXSTYLE WS_EX_ACCEPTFILES | WS_EX_APPWINDOW
 CAPTION "adapted_shell"
 FONT 9, "ËÎÌו"
 BEGIN
-    PUSHBUTTON      "update",IDC_BUTTON1,365,13,37,15
+    PUSHBUTTON      "update",IDC_BUTTON1,366,13,37,15
     CONTROL         "Tab1",IDC_TAB1,"SysTabControl32",WS_GROUP,8,78,397,263
     LTEXT           "Load File:",IDC_STATIC,17,20,42,13
     EDITTEXT        IDC_EDIT_LOAD_FILE,64,17,201,14,ES_AUTOHSCROLL | 
@@ -92,7 +92,7 @@ BEGIN
                     ES_READONLY
     LTEXT           "Out  File:",IDC_STATIC,18,41,42,13
     GROUPBOX        "",IDC_STATIC,7,5,306,57
-    PUSHBUTTON      "add dll",IDC_BUTTON4,321,13,36,15
+    PUSHBUTTON      "add dll",IDC_BUTTON4,321,13,38,15
     PUSHBUTTON      "list dll",IDC_BUTTON5,321,46,37,15
     PUSHBUTTON      "protect",IDC_BUTTON6,366,46,37,15
 END
@@ -131,11 +131,11 @@ BEGIN
     LTEXT           "Static",IDC_STATIC2,10,52,89,19
     LTEXT           "Static",IDC_STATIC4,10,91,89,21
     LTEXT           "Static",IDC_STATIC5,10,112,89,19
-    LTEXT           "Static",IDC_STATIC6,11,132,89,19
-    LTEXT           "Static",IDC_STATIC8,11,172,89,20
-    LTEXT           "Static",IDC_STATIC7,11,151,89,19
-    LTEXT           "Static",IDC_STATIC9,11,192,89,20
-    LTEXT           "Static",IDC_STATIC10,11,211,89,19
+    LTEXT           "Static",IDC_STATIC6,10,132,89,19
+    LTEXT           "Static",IDC_STATIC8,10,172,89,20
+    LTEXT           "Static",IDC_STATIC7,10,151,89,19
+    LTEXT           "Static",IDC_STATIC9,10,192,89,20
+    LTEXT           "Static",IDC_STATIC10,10,211,89,19
 END
 
 

@@ -566,6 +566,9 @@ void CAdapted_shellDlg::OnAddDll()
 	m_tabpage[0].m_CheckListBox.AddString("hhe");
 }
 
+
+
+/*tab切换响应消息*/
 void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	// TODO: Add your control notification handler code here
@@ -574,9 +577,29 @@ void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
     m_CurSelTab = m_tabctrl.GetCurSel();
     pDialog[m_CurSelTab]->ShowWindow(SW_SHOW);
 
-// 	CString strTemp;   
-// 	m_tabpage[m_CurSelTab].m_CheckListBox.GetText(m_tabpage[m_CurSelTab].m_CheckListBox.GetCurSel(),strTemp); 
-// 	AfxMessageBox(strTemp);
+
+
+
+	if (m_tabpage[m_CurSelTab].m_CheckListBox.GetCount()>0){
+
+		CString strTemp;   
+		m_tabpage[m_CurSelTab].m_CheckListBox.GetText(m_tabpage[m_CurSelTab].m_CheckListBox.GetCurSel(),strTemp); 
+		Display_Dll_Input(strTemp);
+	//	AfxMessageBox(strTemp);
+
+	//	AfxMessageBox("大于0");
+
+	}else{
+	//	AfxMessageBox("没有数据");
+	}
+
+
+
+//	AfxMessageBox("change");
+
+//  	CString strTemp;   
+//  	m_tabpage[m_CurSelTab].m_CheckListBox.GetText(m_tabpage[m_CurSelTab].m_CheckListBox.GetCurSel(),strTemp); 
+//  	AfxMessageBox(strTemp);
 	
 	*pResult = 0;
 }
@@ -602,6 +625,12 @@ void CAdapted_shellDlg::OnListDll()
 		m_tabpage[m_dll_info.m_dll_common_info.dll_information[i].PluginType-1].m_CheckListBox.AddString(_T(m_dll_info.m_df_dll_info.dll_name[i]));
 	    i++;
 	}
+
+	m_tabpage[0].m_CheckListBox.SetCurSel(0);
+	m_tabpage[1].m_CheckListBox.SetCurSel(0);
+	m_tabpage[2].m_CheckListBox.SetCurSel(0);
+
+
 
 	Set_Dll_Input_Dialog();
 	

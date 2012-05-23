@@ -57,6 +57,9 @@ BOOL CTabPage1::OnInitDialog()
     m_CheckListBox.SetCheckStyle(BS_AUTOCHECKBOX);
 
 
+
+
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
