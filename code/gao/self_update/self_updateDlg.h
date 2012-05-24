@@ -17,6 +17,9 @@ class CSelf_updateDlg : public CDialog
 public:
 	CSelf_updateDlg(CWnd* pParent = NULL);	// standard constructor
 	bool Download(const CString& strFileURLInServer, const CString & strFileLocalFullPath);//存放到本地的路径 
+	bool Get_Update_File_Name(CString path_name);
+
+	CStringArray   update_file_name;
 
 // Dialog Data
 	//{{AFX_DATA(CSelf_updateDlg)

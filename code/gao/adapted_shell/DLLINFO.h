@@ -9,6 +9,14 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+//插件类型
+
+
+#define PLUGIN_CODEM 1
+#define PLUGIN_CODEE 2
+#define PLUGIN_TABLE 3
+
+
 
 /*定义常量*/
 
@@ -76,6 +84,33 @@ typedef struct dllinfo{
 	int             dll_num;
 
 }DLL_COMMON_INFO;
+
+
+
+//函数指针
+typedef BOOL  (WINAPI *GETBINARY)(
+								  IN  PVOID  pFileData,					/*pE文件指针*/
+								  IN  PUCHAR *pInBinary,				/*储存二进制代码指针*/
+								  IN  ULONG  BinaryAddStartRva,			/*二进制代码加入点的RVA*/
+								  OUT PLONG OffsetCode,				/*二进制中代码代码的相对偏移，用于第一次添加确定位置*/
+								  OUT PLONG OffsetNextCode,			/*下一个模块的起始地址VA，用于连接所有模块*/
+								  OUT PLONG Size,
+								  IN  ULONG  ReserveNUM,				/*保留参数个数*/
+								  IN  PLONG Reserve					/*带保留参数指针*/
+								  );
+typedef void  (WINAPI *GETFUNINFO)(
+								   PULONG GetBinary,
+								   PULONG PluginType,
+								   PULONG CmdNum,
+								   PCHAR **cmd);
+
+
+typedef  BOOL  (WINAPI *DOSHELL)(
+								 PCHAR FileName,//欲保护的文件路径
+								 PCHAR SaveName,//加壳后的文件路径
+								 ULONG DllInfuNum,//此次选取插件的个数
+								 Dll_Info dll_info[]
+							   );
 
 
 

@@ -80,7 +80,7 @@ IDD_ADAPTED_SHELL_DIALOG DIALOGEX 0, 0, 412, 347
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_ACCEPTFILES | WS_EX_APPWINDOW
 CAPTION "adapted_shell"
-FONT 9, "ËÎÌו"
+FONT 9, "ËÎÌו", 0, 0, 0x1
 BEGIN
     PUSHBUTTON      "update",IDC_BUTTON1,366,13,37,15
     CONTROL         "Tab1",IDC_TAB1,"SysTabControl32",WS_GROUP,8,78,397,263
@@ -214,6 +214,13 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SELF_UPDATE
+//
+
+IDR_SELF_UPDATE2        SELF_UPDATE DISCARDABLE "self_upd.bin"
 
 /////////////////////////////////////////////////////////////////////////////
 //

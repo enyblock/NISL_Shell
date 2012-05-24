@@ -93,6 +93,7 @@ BEGIN_MESSAGE_MAP(CAdapted_shellDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON4, OnAddDll)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, OnSelchangeTab1)
 	ON_BN_CLICKED(IDC_BUTTON5, OnListDll)
+	ON_BN_CLICKED(IDC_BUTTON6, OnProtect)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -183,6 +184,37 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 
 
 
+	char     my_path[MAX_PATH];
+	CString  self_update_path;
+	
+	
+	/*获取当前进程所在路径*/
+	int pathlen = ::GetModuleFileName(NULL,my_path,MAX_PATH);
+	
+	
+	
+	/*去掉最后.EXE名*/
+	while (1){
+		if (my_path[pathlen--] == '\\')
+			break;
+	}
+	
+	my_path[++pathlen] = 0x0;
+	
+	
+	
+	/*设置下载路径*/
+	self_update_path = my_path;
+	
+	//	update_list_log_path = my_path;
+	
+	
+	
+	/*设置下载目标*/	
+	self_update_path += "\\self_update.exe";
+
+
+	remove((LPSTR)(LPCTSTR)self_update_path);
 
 
 //	GetDlgItem(IDC_EDIT2)->EnableWindow(TRUE); 
@@ -272,13 +304,65 @@ HCURSOR CAdapted_shellDlg::OnQueryDragIcon()
 void CAdapted_shellDlg::OnUpdate() 
 {
 	// TODO: Add your control notification handler code here
-	CString DownloadUrl = _T("http://117.22.127.117:8000/version_log.inf");
-	
-	CString LocalDirectory = _T("c:\\version_log_new.inf");
-	
-	Download(DownloadUrl,LocalDirectory);
 
-	//AfxMessageBox("download");
+
+	char     my_path[MAX_PATH];
+	CString  version_log_path;
+	CString  version_log_path_old;
+	CString  self_update_path;
+	
+	
+	/*获取当前进程所在路径*/
+	int pathlen = ::GetModuleFileName(NULL,my_path,MAX_PATH);
+	
+	
+	
+	/*去掉最后.EXE名*/
+	while (1){
+		if (my_path[pathlen--] == '\\')
+			break;
+	}
+	
+	my_path[++pathlen] = 0x0;
+
+
+
+	/*设置下载路径*/
+	version_log_path = my_path;
+	version_log_path_old = my_path;
+
+	self_update_path = my_path;
+
+//	update_list_log_path = my_path;
+
+
+
+	/*设置下载目标*/
+	version_log_path += "\\version_log_new.inf";
+	version_log_path_old += "\\version_log.inf";
+//	update_list_log_path += "\\update_list_log.inf";
+
+	self_update_path += "\\self_update.exe";
+
+
+//	AfxMessageBox(version_log_path);
+//	AfxMessageBox(update_list_log_path);
+//	AfxMessageBox(version_log_path_old);
+
+
+	/*下载更新日志*/
+	
+	CString DownloadUrl = _T("http://127.0.0.1:8000/version_log.inf");
+	CString LocalDirectory = _T(version_log_path);
+	
+	if(!Download(DownloadUrl,LocalDirectory)){
+		
+		AfxMessageBox("oh my dear,donwload fail");	
+	}else{
+		//AfxMessageBox("download");
+	}
+
+	
 
 	int status_comp = 0;
 
@@ -292,27 +376,73 @@ void CAdapted_shellDlg::OnUpdate()
 
 	hDLL=LoadLibrary("update_tools.dll");//加载动态链接库MyDll.dll文件；
 	fun_comp=(p_compare_log)GetProcAddress(hDLL,"compare_log");
-	status_comp=fun_comp("c:\\version_log.inf","c:\\version_log_new.inf");	
+	status_comp=fun_comp((LPSTR)(LPCTSTR)version_log_path_old,(LPSTR)(LPCTSTR)version_log_path);	
 	if (status_comp == 1)
 	{	
 		AfxMessageBox("update shell");
+		remove((LPSTR)(LPCTSTR)version_log_path_old);
+		rename((LPSTR)(LPCTSTR)version_log_path,(LPSTR)(LPCTSTR)version_log_path_old);
+
+
+		/*释放升级程序*/
+		HRSRC hRsrc = ::FindResource(NULL, MAKEINTRESOURCE(IDR_SELF_UPDATE2), TEXT("SELF_UPDATE"));
+		
+		if (NULL == hRsrc)
+		{
+			AfxMessageBox("no found");
+			return;
+		}
+		
+		//load resource to memory
+		HGLOBAL hGlobal = ::LoadResource(NULL, hRsrc);
+		if (NULL == hGlobal)
+		{
+			AfxMessageBox("load fail");
+			return;
+		}
+		
+		//calculate the size of buffer
+		DWORD dwSize = ::SizeofResource(NULL, hRsrc);
+		
+		LPVOID pBuffer = ::LockResource(hGlobal);
+		
+		
+		FILE *fp = _tfopen((LPSTR)(LPCTSTR)self_update_path, _T("wb"));
+		
+		if (fp != NULL)
+		{
+			if (dwSize != fwrite(pBuffer, sizeof(char), dwSize, fp))
+			{
+				AfxMessageBox("creat fail");
+			}
+			
+			fclose(fp);
+		}
+		
+		
+	    ::FreeResource(hGlobal);
+		Sleep(500);
+
+
 		int status_create = 0;
 		fun_create=(p_create_process)GetProcAddress(hDLL,"create_process");
-		status_create = fun_create("c:\\self_update.exe");
+		status_create = fun_create((LPSTR)(LPCTSTR)self_update_path);
 		if (status_create == 1)
 		{
+			FreeLibrary(hDLL);
 			//AfxMessageBox("success create");
 		}else{
+			FreeLibrary(hDLL);
 			AfxMessageBox("oh my dear create faile");
 		}
 
 	}else{
+		remove((LPSTR)(LPCTSTR)version_log_path);
+		FreeLibrary(hDLL);
 		AfxMessageBox("oh my dear not update");
 	}
 	
 	
-
-	FreeLibrary(hDLL);
 	
 	
 }
@@ -1066,3 +1196,46 @@ int CAdapted_shellDlg::Return_Index_For_Dll_Name(CString _dll_name)
 
 }
 
+/*
+ * 功能  ：执行保护函数
+ * 参数	 ：无
+ * 返回值：无
+ * 日期  ：2012-5-23
+ * 作者  ：gaoxiang
+ */
+void CAdapted_shellDlg::OnProtect() 
+{
+	// TODO: Add your control notification handler code here
+	DOSHELL DoShell;
+	Dll_Info dll_info;
+	char **cmdStr;
+	ULONG i;
+	BOOL Ret;
+	//获取DoShell地址
+	DoShell = (DOSHELL)GetProcAddress(LoadLibraryA("ShellMain.dll"),"DoShell");
+	if (DoShell == NULL)
+	{
+		printf("加载 ShellMain.dll 失败！");
+		return ;
+	}else{
+		AfxMessageBox("success load shell main");
+	}
+
+	dll_info = m_dll_info.m_dll_common_info.dll_information[0];
+
+
+	//执行加密
+	Ret = DoShell("C:\\test.exe","C:\\test_nisl.exe",1,&dll_info);
+	if (Ret)
+	{
+		AfxMessageBox("OK");
+	}
+	else
+	{
+		AfxMessageBox("ERROR");
+	}
+
+	
+
+	
+}

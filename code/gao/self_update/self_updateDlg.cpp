@@ -291,7 +291,45 @@ bool CSelf_updateDlg::Download(const CString& strFileURLInServer, const CString 
 void CSelf_updateDlg::OnSelfUpdate() 
 {
 	// TODO: Add your control notification handler code here
-
+	
+	char     my_path[MAX_PATH];
+	CString  update_list_log_path;
+	CString  update_path;
+	CString  adapted_shell_main_path;
+	CString  download_base;
+	CString  localdirectorybase;
+	int      j = 0;
+	
+	
+	/*获取当前进程所在路径*/
+	int pathlen = ::GetModuleFileName(NULL,my_path,MAX_PATH);
+	
+	
+	
+	/*去掉最后.EXE名*/
+	while (1){
+		if (my_path[pathlen--] == '\\')
+			break;
+	}
+	
+	my_path[++pathlen] = 0x0;
+	
+	
+	
+	/*设置下载路径*/	
+	update_list_log_path	= my_path;
+	update_path				= my_path;
+	adapted_shell_main_path = my_path;
+	localdirectorybase		= my_path;
+	
+	
+	
+	/*设置下载目标*/
+	update_list_log_path += "\\update_list_log.inf";
+	adapted_shell_main_path += "\\adapted_shell.exe";
+	download_base           = "http://127.0.0.1:8000/";
+	localdirectorybase      += "\\shell_module\\";
+	
 
 
 	/*关闭主进程*/
@@ -306,10 +344,11 @@ void CSelf_updateDlg::OnSelfUpdate()
 	p_delete_process fun_delete = NULL;
 	p_create_process fun_create = NULL;
 	
-	hDLL=LoadLibrary("update_tools1.dll");							   //加载动态链接库MyDll.dll文件；
+	hDLL=LoadLibrary("update_tools.dll");							   //加载动态链接库MyDll.dll文件；
 	
 	fun_delete=(p_delete_process)GetProcAddress(hDLL,"delete_process");
 	
+	/*删除主进程*/
 	status_delete = fun_delete("adapted_shell.exe");
 	
 	if (status_delete == 0)
@@ -326,20 +365,47 @@ void CSelf_updateDlg::OnSelfUpdate()
 	
 	/*下载资源*/
 	// TODO: Add your control notification handler code here
-	CString DownloadUrl = _T("http://117.22.127.117:8000/README");
+	CString DownloadUrl = _T("http://127.0.0.1:8000/update_list_log.inf");
 	
-	CString LocalDirectory = _T("c:\\README");
+	CString LocalDirectory = _T(update_list_log_path);
+
+	/*删除已存在的update_list文件*/
+	remove((LPSTR)(LPCTSTR)update_list_log_path);
 	
 	if(!Download(DownloadUrl,LocalDirectory))
 	{
 		AfxMessageBox("oh my dear,donwload fail");
 	}else{
-		
+
+		Sleep(50);
+		/*获取update 文件名*/
+		Get_Update_File_Name(update_list_log_path);
+
+		/*删除已存在的update_list文件*/
+		remove((LPSTR)(LPCTSTR)update_list_log_path);
 		//AfxMessageBox("download");
 		
 	}
+	int update_num = 0;
+	update_num = update_file_name.GetSize();
+	while (j < update_num)
+	{
+		DownloadUrl = download_base+update_file_name.GetAt(j);
+		LocalDirectory = localdirectorybase+update_file_name.GetAt(j);
+		
+		if(!Download(DownloadUrl,LocalDirectory))
+		{
+			AfxMessageBox("oh my dear,donwload fail");
+		}else{
+
+		}
 
 
+	//	AfxMessageBox(update_file_name.GetAt(j));
+		j++;
+	}
+
+	
 
 
 
@@ -359,16 +425,12 @@ void CSelf_updateDlg::OnSelfUpdate()
 	if ( IDOK == MessageBox("close me,and start main program","download finished",MB_DEFBUTTON2) )
 	{
 
-		/*删除和重命名日志文件*/
-		remove("c:\\version_log.inf");
-		rename("c:\\version_log_new.inf","c:\\version_log.inf");
 	
-
 		
 		/*创建主进程*/
 		fun_create=(p_create_process)GetProcAddress(hDLL,"create_process");
 		
-		status_create = fun_create("c:\\adapted_shell.exe");
+		status_create = fun_create((LPSTR)(LPCTSTR)adapted_shell_main_path);
 		
 		if (status_create == 1)
 		{	
@@ -386,9 +448,11 @@ void CSelf_updateDlg::OnSelfUpdate()
 		
 		if (status_delete == 0)
 		{	
+			FreeLibrary(hDLL);
 			//AfxMessageBox("delete success");
 			
 		}else{
+			FreeLibrary(hDLL);
 			AfxMessageBox("oh my dear,delete fail");
 		}
 		
@@ -397,9 +461,39 @@ void CSelf_updateDlg::OnSelfUpdate()
 
 
 	
-	FreeLibrary(hDLL);
+
 
 		
+}
+
+
+
+
+/*获得要下载文件的名字*/
+bool CSelf_updateDlg::Get_Update_File_Name(CString path_name)
+{
+	FILE *fp = NULL;
+	char file_name[512];
+	int  i = 0;
+
+	if(NULL == (fp = fopen((LPSTR)(LPCTSTR)path_name,"r"))){
+		fprintf(stderr,"can't open this file");
+		exit (-1);
+	}
+
+
+	while(fscanf(fp,"%s",file_name) != EOF)
+	{
+		i++;
+		update_file_name.Add(file_name);
+	}
+
+	update_file_name.SetSize(i);
+
+
+	fclose(fp);
+
+	return (i != 0);
 }
 
 void CSelf_updateDlg::OnCancle() 

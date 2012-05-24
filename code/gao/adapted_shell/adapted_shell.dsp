@@ -169,10 +169,18 @@ SOURCE=.\res\adapted_shell.ico
 
 SOURCE=.\res\adapted_shell.rc2
 # End Source File
+# Begin Source File
+
+SOURCE=.\self_upd.bin
+# End Source File
 # End Group
 # Begin Source File
 
 SOURCE=.\ReadMe.txt
+# End Source File
+# Begin Source File
+
+SOURCE=.\Debug\self_update.exe
 # End Source File
 # End Target
 # End Project

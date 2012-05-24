@@ -77,6 +77,7 @@ protected:
 	afx_msg void OnAddDll();
 	afx_msg void OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnListDll();
+	afx_msg void OnProtect();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

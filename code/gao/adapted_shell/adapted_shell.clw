@@ -13,12 +13,12 @@ Class2=CAdapted_shellDlg
 Class3=CAboutDlg
 
 ResourceCount=5
-Resource1=IDD_DIALOG_PAG
+Resource1=IDD_ADAPTED_SHELL_DIALOG
 Resource2=IDR_MAINFRAME
 Resource3=IDD_ABOUTBOX
 Class4=CTabPage
 Class5=CTabPage1
-Resource4=IDD_ADAPTED_SHELL_DIALOG
+Resource4=IDD_DIALOG_PAG
 Class6=CDllInput
 Resource5=IDD_DLL_INPUT
 
