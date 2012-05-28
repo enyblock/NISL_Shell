@@ -20,7 +20,6 @@ CTabPage1::CTabPage1(CWnd* pParent)
 	: CDialog(CTabPage1::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CTabPage1)
-		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
 }
 
@@ -30,7 +29,6 @@ void CTabPage1::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 
 	//{{AFX_DATA_MAP(CTabPage1)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 }
 

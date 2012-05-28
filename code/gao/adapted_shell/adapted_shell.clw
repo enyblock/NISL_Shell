@@ -2,7 +2,7 @@
 
 [General Info]
 Version=1
-LastClass=CAdapted_shellDlg
+LastClass=CTabPage1
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "adapted_shell.h"
@@ -15,10 +15,10 @@ Class3=CAboutDlg
 ResourceCount=5
 Resource1=IDD_ADAPTED_SHELL_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_DIALOG_PAG
 Class4=CTabPage
 Class5=CTabPage1
-Resource4=IDD_DIALOG_PAG
+Resource4=IDD_ABOUTBOX
 Class6=CDllInput
 Resource5=IDD_DLL_INPUT
 
@@ -92,7 +92,7 @@ Type=0
 HeaderFile=TabPage1.h
 ImplementationFile=TabPage1.cpp
 BaseClass=CDialog
-Filter=D
+Filter=W
 LastObject=IDC_LIST_DLL_BOX
 VirtualFilter=dWC
 
@@ -103,16 +103,16 @@ ControlCount=24
 Control1=IDC_STATIC,button,1342177287
 Control2=IDC_STATIC_BRIEF_GROUP,button,1342177287
 Control3=IDC_STATIC1,static,1342308352
-Control4=IDC_EDIT1,edit,1350631552
-Control5=IDC_EDIT2,edit,1350631552
-Control6=IDC_EDIT3,edit,1350631552
-Control7=IDC_EDIT4,edit,1350631552
-Control8=IDC_EDIT5,edit,1350631552
-Control9=IDC_EDIT6,edit,1350631552
-Control10=IDC_EDIT7,edit,1350631552
-Control11=IDC_EDIT8,edit,1350631552
-Control12=IDC_EDIT9,edit,1350631552
-Control13=IDC_EDIT10,edit,1350631552
+Control4=IDC_EDIT1,edit,1350639744
+Control5=IDC_EDIT2,edit,1350639744
+Control6=IDC_EDIT3,edit,1350639744
+Control7=IDC_EDIT4,edit,1350639744
+Control8=IDC_EDIT5,edit,1350639744
+Control9=IDC_EDIT6,edit,1350639744
+Control10=IDC_EDIT7,edit,1350639744
+Control11=IDC_EDIT8,edit,1350639744
+Control12=IDC_EDIT9,edit,1350639744
+Control13=IDC_EDIT10,edit,1350639744
 Control14=IDC_STATIC_BRIEF,static,1342308352
 Control15=IDC_STATIC_DLL_NAME,static,1342308352
 Control16=IDC_STATIC3,static,1342308352

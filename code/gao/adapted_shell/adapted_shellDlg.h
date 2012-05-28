@@ -27,9 +27,12 @@ public:
 	bool Download(const CString& strFileURLInServer, const CString & strFileLocalFullPath);//存放到本地的路径 
 	BOOL PreTranslateMessage(MSG* pMsg);
 	void Display_Dll_Input(CString _dll_name);
+	int  Set_Parameters(CString _dll_name);
 	int  Return_Index_For_Dll_Name(CString _dll_name);
 	int  Set_Dll_Input_Dialog();
 	int  Show_Edit_And_Static(int limit,int i);
+	int  Set_Parameters_From_Dll_Input_Dialog(int limit,int i);
+	DWORD dstring_to_hex (const char *str);
 	
     // Dialog Data
 	//{{AFX_DATA(CAdapted_shellDlg)

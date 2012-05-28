@@ -452,7 +452,7 @@ BOOL CAdapted_shellDlg::PreTranslateMessage(MSG* pMsg)
 {
 	if(pMsg->message == WM_KEYDOWN && pMsg->wParam == 'X' && IsCTRLPressed())
 	{
-		AfxMessageBox("Made By Enyblock\nEmail: enyblock@gmail.com\nQQ: 502525713\nVersion: 4.00 ");
+		AfxMessageBox("Made By Enyblock\nEmail: enyblock@gmail.com\nQQ: 502525713\nVersion: 3.0 ");
 		return TRUE;
 	}else{
 		return FALSE;
@@ -793,6 +793,282 @@ void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
 //	Set_Dll_Input_Dialog();
 
 }
+
+
+/*
+ * 功能  ：通过DLL 名字设置dll参数
+ * 返回值：-1 返回错误，其他值为返回的索引值
+ * 日期  ：2012-5-25
+ * 作者  ：gaoxiang
+ */
+int CAdapted_shellDlg::Set_Parameters(CString _dll_name)
+{
+	int index = -1;
+	int i = 0;
+	
+	index = Return_Index_For_Dll_Name(_dll_name);
+
+
+
+
+	Set_Parameters_From_Dll_Input_Dialog(m_dll_info.m_dll_common_info.dll_information[index].CmdNum,index);
+
+
+	return index;
+
+}
+
+
+/*
+ * 功能  ：根据所需参数个数显示编辑框个数
+ * 返回值：1 表示成功，0表示失败
+ * 日期  ：2012-5-22
+ * 作者  ：gaoxiang
+ */
+
+int CAdapted_shellDlg::Set_Parameters_From_Dll_Input_Dialog(int limit,int i)
+{
+	CString str1;
+	CString str2;
+	CString str3;
+	CString str4;
+	CString str5;
+	CString str6;
+	CString str7;
+	CString str8;
+	CString str9;
+	CString str10;
+
+	switch(limit){
+		case 0:{
+			;
+			   }break;
+		case 1:{
+			
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+
+
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+
+			   }break;
+		case 2:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+
+
+
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+
+
+			   }break;
+		case 3:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+
+			   }break;
+		case 4:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+
+
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+
+
+			   }break;
+		case 5:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+
+
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+
+			   }break;
+		case 6:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT6,str6);	
+	
+
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[5] = dstring_to_hex((LPSTR)(LPCTSTR)str6);
+
+			   }break;
+		case 7:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT6,str6);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT7,str7);	
+
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[5] = dstring_to_hex((LPSTR)(LPCTSTR)str6);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[6] = dstring_to_hex((LPSTR)(LPCTSTR)str7);
+
+			   }break;
+		case 8:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT6,str6);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT7,str7);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT8,str8);
+
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[5] = dstring_to_hex((LPSTR)(LPCTSTR)str6);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[6] = dstring_to_hex((LPSTR)(LPCTSTR)str7);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[7] = dstring_to_hex((LPSTR)(LPCTSTR)str8);
+
+			   }break;
+		case 9:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT6,str6);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT7,str7);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT8,str8);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT9,str9);
+
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[5] = dstring_to_hex((LPSTR)(LPCTSTR)str6);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[6] = dstring_to_hex((LPSTR)(LPCTSTR)str7);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[7] = dstring_to_hex((LPSTR)(LPCTSTR)str8);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[8] = dstring_to_hex((LPSTR)(LPCTSTR)str9);
+
+			   }break;
+		case 10:{
+					m_dll_input[i].GetDlgItemText(IDC_EDIT1,str1);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT2,str2);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT3,str3);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT4,str4);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT5,str5);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT6,str6);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT7,str7);	
+					m_dll_input[i].GetDlgItemText(IDC_EDIT8,str8);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT9,str9);
+					m_dll_input[i].GetDlgItemText(IDC_EDIT10,str10);
+					
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[0] = dstring_to_hex((LPSTR)(LPCTSTR)str1);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[1] = dstring_to_hex((LPSTR)(LPCTSTR)str2);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[2] = dstring_to_hex((LPSTR)(LPCTSTR)str3);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[3] = dstring_to_hex((LPSTR)(LPCTSTR)str4);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[4] = dstring_to_hex((LPSTR)(LPCTSTR)str5);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[5] = dstring_to_hex((LPSTR)(LPCTSTR)str6);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[6] = dstring_to_hex((LPSTR)(LPCTSTR)str7);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[7] = dstring_to_hex((LPSTR)(LPCTSTR)str8);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[8] = dstring_to_hex((LPSTR)(LPCTSTR)str9);
+					m_dll_info.m_dll_common_info.dll_information[i].Cmd[9] = dstring_to_hex((LPSTR)(LPCTSTR)str10);
+			   }break;
+		default:;
+	}
+
+
+	return 1;
+			
+}
+
+/*
+ * 功能  ：实现字符串转16进制
+ * 返回值：转换后dword值
+ * 日期  ：2012-5-28
+ * 作者  ：gaoxiang
+ */
+DWORD CAdapted_shellDlg::dstring_to_hex (const char *str)
+{
+	int   i = 0;
+	char  *index = "0123456789abcdef";				//记录查找索引
+	char  *temp  = strdup(str);						//copy str
+	char  *lower = strlwr(temp);
+	char  *find  = NULL;
+	DWORD dword = 0;
+	
+	if (strstr(lower,"short ")) {						//检测"short"标记
+		strcpy(lower,lower+6);
+	}
+	else if (strstr(lower,"far "))
+	{
+        strcpy(lower,lower+4);
+	} 
+	else
+	{
+		;
+	}
+	
+	
+	while (i < strlen(lower)) {
+		
+		find = strchr(index,lower[i]);
+		
+		dword = dword ^ (((DWORD)(find-index)) << ((strlen(lower)-1-i)*4));
+		
+		i++;
+	}
+	
+	return dword;
+
+}
+
+
 /*
  * 功能  ：根据所需参数个数显示编辑框个数
  * 返回值：1 表示成功，0表示失败
@@ -1206,11 +1482,110 @@ int CAdapted_shellDlg::Return_Index_For_Dll_Name(CString _dll_name)
 void CAdapted_shellDlg::OnProtect() 
 {
 	// TODO: Add your control notification handler code here
+
+
+
+
+
+	/*判断listbox已经填入dll*/
+	int index = 0;
+	int status = 0;
+
+	while (index < 3){
+		if (m_tabpage[index].m_CheckListBox.GetCount())
+			status = 1;											
+		index++;
+	}
+	/*如果没有载入数据，提示载入shell module*/
+	if (!status)
+	{
+		MessageBox("please load shell module!","warning",MB_DEFBUTTON2);
+	}
+
+
+
+	/*判断输入文件edit是否空*/
+	CString load_path;
+	CString out_path;
+
+	GetDlgItemText(IDC_EDIT_LOAD_FILE,load_path);
+
+
+
+	if (load_path == "" ){
+		MessageBox("no file in put","warning",MB_DEFBUTTON2);
+	}else{
+		GetDlgItemText(IDC_EDIT_OUT_FILE,out_path);
+	}
+
+
+
+
+
+
+	/*查找 选中 dll 名字，为后续添加参数做准备*/
+	int k = 0;
+	int j = 0;
+	int i = 0;
+	int dll_select_sum = 0;		/*记录选中dll个数*/
+	Dll_Info dll_info[DLL_NUM];
+
+ 	while (k < 3){
+
+		if (m_tabpage[k].m_CheckListBox.GetCount()){						/*如果listbox有dll信息，则进行处理，*/
+		
+			j = 0;
+		
+			while (j < m_tabpage[k].m_CheckListBox.GetCount()){
+				
+ 				if (m_tabpage[k].m_CheckListBox.GetCheck(j)){
+
+					dll_select_sum++;
+ 
+ 					CString strTemp;   
+
+ 					m_tabpage[k].m_CheckListBox.GetText(j,strTemp);   
+
+
+					int temp_index = Set_Parameters(strTemp);
+
+					dll_info[i] = m_dll_info.m_dll_common_info.dll_information[temp_index];
+
+					i++;
+ 
+ 				}
+ 
+ 				j++;
+ 			}
+ 			
+ 			
+ 
+ 		}
+ 			
+ 			k++;
+ 		
+ 	}
+
+
+
+
+
 	DOSHELL DoShell;
-	Dll_Info dll_info;
 	char **cmdStr;
-	ULONG i;
 	BOOL Ret;
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//获取DoShell地址
 	DoShell = (DOSHELL)GetProcAddress(LoadLibraryA("ShellMain.dll"),"DoShell");
 	if (DoShell == NULL)
@@ -1221,11 +1596,10 @@ void CAdapted_shellDlg::OnProtect()
 		AfxMessageBox("success load shell main");
 	}
 
-	dll_info = m_dll_info.m_dll_common_info.dll_information[0];
 
 
 	//执行加密
-	Ret = DoShell("C:\\test.exe","C:\\test_nisl.exe",1,&dll_info);
+	Ret = DoShell((LPSTR)(LPCTSTR)load_path,(LPSTR)(LPCTSTR)out_path,dll_select_sum,dll_info);
 	if (Ret)
 	{
 		AfxMessageBox("OK");

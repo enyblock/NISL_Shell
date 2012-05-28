@@ -30,7 +30,6 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CTabPage1)
 	enum { IDD = IDD_DIALOG_PAG };
-		// NOTE: the ClassWizard will add data members here
 	//}}AFX_DATA
 
 
