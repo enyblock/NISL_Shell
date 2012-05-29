@@ -1035,6 +1035,13 @@ int CAdapted_shellDlg::Set_Parameters_From_Dll_Input_Dialog(int limit,int i)
  */
 DWORD CAdapted_shellDlg::dstring_to_hex (const char *str)
 {
+
+
+ 	if (strcmp(str,"") == 0)
+ 	{
+ 		return  -1;
+ 	}
+
 	int   i = 0;
 	char  *index = "0123456789abcdef";				//¼ÇÂ¼²éÕÒË÷Òı
 	char  *temp  = strdup(str);						//copy str
