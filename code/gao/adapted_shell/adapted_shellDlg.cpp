@@ -72,6 +72,21 @@ CAdapted_shellDlg::CAdapted_shellDlg(CWnd* pParent /*=NULL*/)
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+
+
+
+	/*测试发现构造函数里面没有初始化类变量  2012-5-30 */
+	m_CurSelTab = 0;
+	pDialog[0] = NULL;
+	pDialog[1] = NULL;
+	pDialog[2] = NULL;
+
+	int i = 0;
+
+	while (i < DLL_NUM){
+		pDialog_input[i] = NULL;
+		i++;
+	}
 }
 
 void CAdapted_shellDlg::DoDataExchange(CDataExchange* pDX)

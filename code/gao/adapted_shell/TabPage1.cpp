@@ -21,6 +21,9 @@ CTabPage1::CTabPage1(CWnd* pParent)
 {
 	//{{AFX_DATA_INIT(CTabPage1)
 	//}}AFX_DATA_INIT
+
+	/*测试发现构造函数里面没有初始化类变量  2012-5-30 */
+	m_main_dialog = NULL;
 }
 
 
