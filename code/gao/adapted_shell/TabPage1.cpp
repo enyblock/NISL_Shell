@@ -85,6 +85,8 @@ void CTabPage1::OnSelchangeListDllBox()
 	m_CheckListBox.GetText(m_CheckListBox.GetCurSel(),strTemp);   
 
 
+	
+
 	m_main_dialog->Display_Dll_Input(strTemp);
 	
 }

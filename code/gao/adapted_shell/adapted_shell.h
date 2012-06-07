@@ -23,6 +23,8 @@ class CAdapted_shellApp : public CWinApp
 {
 public:
 	CAdapted_shellApp();
+	int   m_curLang;
+	bool  __SetItemText(CDialog *pDlg, int itemID, int stringID);
 
 // Overrides
 	// ClassWizard generated virtual function overrides

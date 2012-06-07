@@ -30,18 +30,12 @@ int DLLINFO::GetDllName(void)
 	fun=(p_find_all_dll)GetProcAddress(hDLL,"find_all_dll");
 	num=fun(&m_df_dll_info);	
 	
-	int i = 0;
 	
-	if (num == 1)
-	{
-		AfxMessageBox("list success");
-	}else{
-		AfxMessageBox("list faile");
-	}
+
 	
 	FreeLibrary(hDLL);
 	
-	return 0;
+	return (num == 1);
 }
 
 
@@ -53,6 +47,15 @@ DLLINFO::DLLINFO()
 DLLINFO::~DLLINFO()
 {
 
+}
+//通过语种ID返回响应的语种字符串
+CString DLLINFO::LoadLanguageFromId(UINT lId)
+{
+	CString temp;
+	
+	temp.LoadString(lId);
+	
+	return temp;
 }
 
 

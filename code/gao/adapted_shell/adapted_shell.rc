@@ -76,32 +76,35 @@ BEGIN
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_ADAPTED_SHELL_DIALOG DIALOGEX 0, 0, 412, 347
+IDD_ADAPTED_SHELL_DIALOG DIALOGEX 0, 0, 531, 347
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_ACCEPTFILES | WS_EX_APPWINDOW
-CAPTION "adapted_shell"
+CAPTION "adapted shell"
 FONT 9, "宋体"
 BEGIN
-    PUSHBUTTON      "update",IDC_BUTTON1,366,13,37,15
+    PUSHBUTTON      "升级",IDC_BUTTON_UPDATE,473,12,49,15
     CONTROL         "Tab1",IDC_TAB1,"SysTabControl32",WS_GROUP,9,76,396,261
-    LTEXT           "Load File:",IDC_STATIC,17,20,42,13
-    EDITTEXT        IDC_EDIT_LOAD_FILE,64,17,201,14,ES_AUTOHSCROLL | 
+    LTEXT           "载入路径:",IDC_STATIC_LOAD_FILE,17,20,42,13
+    EDITTEXT        IDC_EDIT_LOAD_FILE,64,17,277,14,ES_AUTOHSCROLL | 
                     ES_READONLY
-    PUSHBUTTON      "Open",IDC_BUTTON2,275,17,28,15
-    EDITTEXT        IDC_EDIT_OUT_FILE,64,40,201,14,ES_AUTOHSCROLL | 
+    PUSHBUTTON      "打开",IDC_BUTTON_OPEN_FILE,354,17,33,15
+    EDITTEXT        IDC_EDIT_OUT_FILE,64,40,277,14,ES_AUTOHSCROLL | 
                     ES_READONLY
-    LTEXT           "Out  File:",IDC_STATIC,18,41,42,13
-    GROUPBOX        "",IDC_STATIC,7,5,306,57
-    PUSHBUTTON      "add dll",IDC_BUTTON4,321,13,38,15
-    PUSHBUTTON      "list dll",IDC_BUTTON5,321,46,37,15
-    PUSHBUTTON      "protect",IDC_BUTTON6,366,46,37,15
+    LTEXT           "输出路径:",IDC_STATIC_OUT_FILE,18,41,42,13
+    GROUPBOX        "",IDC_STATIC,7,5,398,57
+    PUSHBUTTON      "增加模块",IDC_BUTTON_ADD_DLL,416,12,49,15
+    PUSHBUTTON      "载入模块",IDC_BUTTON_LIST_DLL,416,45,49,15
+    PUSHBUTTON      "保护",IDC_BUTTON_PROTECT,473,45,49,15
+    COMBOBOX        IDC_COMBO_LANGUAGE_LIST,450,323,77,38,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "语言:",IDC_STATIC_LANGUAGES,409,326,40,10
 END
 
 IDD_DIALOG_PAG DIALOG DISCARDABLE  0, 0, 144, 250
 STYLE WS_CHILD
 FONT 9, "宋体"
 BEGIN
-    GROUPBOX        "module list",IDC_STATIC,7,7,125,229
+    GROUPBOX        "module list",IDC_STATIC_MODULE_LIST,7,7,125,229
     LISTBOX         IDC_LIST_DLL_BOX,16,24,105,205,LBS_SORT | 
                     LBS_OWNERDRAWFIXED | LBS_HASSTRINGS | WS_VSCROLL | 
                     WS_TABSTOP
@@ -111,31 +114,42 @@ IDD_DLL_INPUT DIALOG DISCARDABLE  0, 0, 254, 251
 STYLE WS_CHILD
 FONT 9, "宋体"
 BEGIN
-    GROUPBOX        "dll parameters",IDC_STATIC,5,7,234,230
+    GROUPBOX        "dll parameters",IDC_STATIC_MODULE_PARAMETERS,5,7,234,
+                    230
     GROUPBOX        "brief introduction",IDC_STATIC_BRIEF_GROUP,135,24,90,
                     203
-    LTEXT           "Static",IDC_STATIC1,9,31,89,18
-    EDITTEXT        IDC_EDIT1,101,30,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT2,101,50,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT3,101,70,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT4,101,90,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT5,101,110,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT6,101,130,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT7,101,150,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT8,101,170,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT9,101,190,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    EDITTEXT        IDC_EDIT10,101,210,26,13,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "static",IDC_STATIC_BRIEF,143,60,77,163
-    LTEXT           "static",IDC_STATIC_DLL_NAME,143,43,77,10
-    LTEXT           "Static",IDC_STATIC3,10,72,89,20
-    LTEXT           "Static",IDC_STATIC2,10,52,89,19
-    LTEXT           "Static",IDC_STATIC4,10,91,89,21
-    LTEXT           "Static",IDC_STATIC5,10,112,89,19
-    LTEXT           "Static",IDC_STATIC6,10,132,89,19
-    LTEXT           "Static",IDC_STATIC8,10,172,89,20
-    LTEXT           "Static",IDC_STATIC7,10,151,89,19
-    LTEXT           "Static",IDC_STATIC9,10,192,89,20
-    LTEXT           "Static",IDC_STATIC10,10,211,89,19
+    LTEXT           "",IDC_STATIC1,9,31,89,18,NOT WS_VISIBLE
+    EDITTEXT        IDC_EDIT1,101,30,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT2,101,50,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT3,101,70,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT4,101,90,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT5,101,110,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT6,101,130,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT7,101,150,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT8,101,170,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT9,101,190,26,13,ES_AUTOHSCROLL | ES_NUMBER | NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_EDIT10,101,210,26,13,ES_AUTOHSCROLL | ES_NUMBER | 
+                    NOT WS_VISIBLE
+    LTEXT           "",IDC_STATIC_BRIEF,143,60,77,163
+    LTEXT           "",IDC_STATIC_DLL_NAME,143,43,77,10
+    LTEXT           "",IDC_STATIC3,10,72,89,20
+    LTEXT           "",IDC_STATIC2,10,52,89,19
+    LTEXT           "",IDC_STATIC4,10,91,89,21
+    LTEXT           "",IDC_STATIC5,10,112,89,19
+    LTEXT           "",IDC_STATIC6,10,132,89,19
+    LTEXT           "",IDC_STATIC8,10,172,89,20
+    LTEXT           "",IDC_STATIC7,10,151,89,19
+    LTEXT           "",IDC_STATIC9,10,192,89,20
+    LTEXT           "",IDC_STATIC10,10,211,89,19
 END
 
 
@@ -198,6 +212,11 @@ BEGIN
         BOTTOMMARGIN, 48
     END
 
+    IDD_ADAPTED_SHELL_DIALOG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 528
+    END
+
     IDD_DIALOG_PAG, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -224,15 +243,131 @@ IDR_SELF_UPDATE2        SELF_UPDATE DISCARDABLE "self_upd.bin"
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Dialog Info
+//
+
+IDD_ADAPTED_SHELL_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO_LANGUAGE_LIST, 0x403, 8, 0
+0x6e45, 0x6c67, 0x7369, 0x0068, 
+    IDC_COMBO_LANGUAGE_LIST, 0x403, 9, 0
+0xf2bc, 0xe5cc, 0xd0d6, 0xc4ce, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_ABOUTBOX            "关于 adapted_shell(&A)..."
+    IDD_ADAPTED_SHELL_DIALOG "自适应加壳软件"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_PROTECT      "保护"
+    IDC_STATIC_LOAD_FILE    "载入路径:"
+    IDC_STATIC_OUT_FILE     "输出路径:"
+    IDS_STRING_TABLE1       "表处理"
+    IDS_STRING_TABLE2       "加密处理"
+    IDS_STRING_TABLE3       "修改处理"
+    IDC_STATIC_MODULE       "模块列表"
+    IDS_STRING_LIST_FAIL    " 载入失败"
+    IDS_STRING_PLEASE_LOAD_MODULE "   请加载壳模块      "
+    IDS_STRING_NO_FILE_INPUT "请载入待保护文件"
+    IDS_STRING_PROTECT_FINISH "保护完成"
+    IDS_STRING_SUCCESS_LOAD_SHELL_MAIN "成功加载 Shell Main"
+    IDS_STRING_SUCCESS_LOAD_FAIL_SHELL_MAIN "加载 Shell Main 失败"
+    IDS_STRING_PROTECT_FINISH_ERROR "保护失败"
+    IDC_STATIC_LANGUAGE     "   语言:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_UPDATE       "升级"
+    IDC_BUTTON_OPEN_FILE    "打开"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_ADD_DLL      "增加模块"
+    IDC_BUTTON_LIST_DLL     "载入模块"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIC_BRIEF_GROUP  "模块简介"
+    IDC_STATIC_MODULE_PARAMETER "模块参数"
+    IDS_STRING_LIST_SUCCESS "  成功载入"
 END
 
 #endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "About adapted_shell(&A)..."
+    IDD_ADAPTED_SHELL_DIALOG "adapted shell"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_PROTECT      "Protect"
+    IDC_STATIC_LOAD_FILE    "Load File:"
+    IDC_STATIC_OUT_FILE     "Out File:"
+    IDS_STRING_TABLE1       "Table"
+    IDS_STRING_TABLE2       "Encryption"
+    IDS_STRING_TABLE3       "Modify"
+    IDC_STATIC_MODULE       "Module List"
+    IDS_STRING_LIST_FAIL    "List Fail"
+    IDS_STRING_PLEASE_LOAD_MODULE "Please Load Shell Module!!"
+    IDS_STRING_NO_FILE_INPUT "Please Load Source File!!"
+    IDS_STRING_PROTECT_FINISH "Protect Finished"
+    IDS_STRING_SUCCESS_LOAD_SHELL_MAIN "Loading Shell Main Successful"
+    IDS_STRING_SUCCESS_LOAD_FAIL_SHELL_MAIN "Loading Shell Main Failure"
+    IDS_STRING_PROTECT_FINISH_ERROR "Protect Failure"
+    IDC_STATIC_LANGUAGE     "Language:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_UPDATE       "Update"
+    IDC_BUTTON_OPEN_FILE    "Open"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_ADD_DLL      "Add"
+    IDC_BUTTON_LIST_DLL     " Load Module "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_STATIC_BRIEF_GROUP  "Brief Introduction"
+    IDC_STATIC_MODULE_PARAMETER "Module Parameters"
+    IDS_STRING_LIST_SUCCESS "Load Success"
+END
+
+#endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

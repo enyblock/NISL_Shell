@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
-
+extern CAdapted_shellApp theApp;
 
 //define ctrl pressed
 #define IsCTRLPressed() ((GetKeyState(VK_CONTROL) & (1<<(sizeof(SHORT)*8-1))) != 0)
@@ -81,6 +81,10 @@ CAdapted_shellDlg::CAdapted_shellDlg(CWnd* pParent /*=NULL*/)
 	pDialog[1] = NULL;
 	pDialog[2] = NULL;
 
+	m_dll_info.m_dll_common_info.dll_num = 0;
+
+	m_dll_info.m_df_dll_info.num == 0;
+
 	int i = 0;
 
 	while (i < DLL_NUM){
@@ -93,6 +97,7 @@ void CAdapted_shellDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAdapted_shellDlg)
+	DDX_Control(pDX, IDC_COMBO_LANGUAGE_LIST, m_language_list);
 	DDX_Control(pDX, IDC_TAB1, m_tabctrl);
 	//}}AFX_DATA_MAP
 }
@@ -109,6 +114,8 @@ BEGIN_MESSAGE_MAP(CAdapted_shellDlg, CDialog)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, OnSelchangeTab1)
 	ON_BN_CLICKED(IDC_BUTTON5, OnListDll)
 	ON_BN_CLICKED(IDC_BUTTON6, OnProtect)
+	ON_CBN_SELCHANGE(IDC_COMBO_LANGUAGE_LIST, OnSelchangeComboLanguageList)
+	ON_BN_CLICKED(IDC_BUTTON_LIST_DLL, OnButtonListDll)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -121,19 +128,36 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 
 	// Add "About..." menu item to system menu.
 
+
+
 //	h_dlgmain = this->m_hWnd;
 
+	CString table1 = _T("");
+	CString table2 = _T("");
+	CString table3 = _T("");
+
+
+	table1.LoadString(IDS_STRING_TABLE1);
+	table2.LoadString(IDS_STRING_TABLE2);
+	table3.LoadString(IDS_STRING_TABLE3);
+
+
+
+
 	//添加table
-	m_tabctrl.InsertItem(0,_T("Table"));
-	m_tabctrl.InsertItem(0,_T("encryption"));
-	m_tabctrl.InsertItem(0,_T("modify"));
+	m_tabctrl.InsertItem(0,_T(table3));
+	m_tabctrl.InsertItem(1,_T(table2));
+	m_tabctrl.InsertItem(2,_T(table1));
+
+
 
 
 	
 	//创建dialog
  	m_tabpage[0].Create(IDD_DIALOG_PAG,&m_tabctrl);
  	m_tabpage[1].Create(IDD_DIALOG_PAG,&m_tabctrl);
- 	m_tabpage[2].Create(IDD_DIALOG_PAG,&m_tabctrl);
+	m_tabpage[2].Create(IDD_DIALOG_PAG,&m_tabctrl);
+
 
 
 	m_tabpage[0].m_main_dialog = this;
@@ -234,7 +258,7 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 
 //	GetDlgItem(IDC_EDIT2)->EnableWindow(TRUE); 
 
-
+	
 
 
 	// IDM_ABOUTBOX must be in the system command range.
@@ -260,8 +284,10 @@ BOOL CAdapted_shellDlg::OnInitDialog()
 	
 	// TODO: Add extra initialization here
 
-	SkinH_Attach();
+	m_language_list.SetCurSel(theApp.m_curLang);
+	OnSelchangeComboLanguageList();
 
+	SkinH_Attach();
 
 	
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -724,18 +750,47 @@ void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 
 
 
+//	if (m_tabpage[m_CurSelTab].m_CheckListBox.GetCount() <= 0)
+//	{
+//		if (m_dll_info.m_dll_common_info.dll_num == 0)
+//		{
+//			return;
+//		}
+
+//		int i = 0;
+/*
+		while (i < m_dll_info.m_df_dll_info.num){
+			pDialog_input[i]->ShowWindow(SW_HIDE);
+			i++;
+		}
+*/		
+//		pDialog_input[m_dll_info.m_df_dll_info.num]->ShowWindow(SW_SHOW);
+//		Set_Dll_Input_Dialog();
+//		pDialog_input[m_dll_info.m_df_dll_info.num]->ShowWindow(SW_SHOW);
+
+//		return;
+		
+	
+//	}
+
+
+
 
 	if (m_tabpage[m_CurSelTab].m_CheckListBox.GetCount()>0){
 
 		CString strTemp;   
 		m_tabpage[m_CurSelTab].m_CheckListBox.GetText(m_tabpage[m_CurSelTab].m_CheckListBox.GetCurSel(),strTemp); 
 		Display_Dll_Input(strTemp);
+//		Set_Dll_Input_Dialog();
 	//	AfxMessageBox(strTemp);
 
 	//	AfxMessageBox("大于0");
 
 	}else{
-	//	AfxMessageBox("没有数据");
+	//	CString strTemp = "";
+	//	Display_Dll_Input(strTemp);
+	//	pDialog_input[20]->ShowWindow(SW_SHOW);
+		
 	}
 
 
@@ -752,7 +807,14 @@ void CAdapted_shellDlg::OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult)
 void CAdapted_shellDlg::OnListDll() 
 {
 	// TODO: Add your control notification handler code here
-	m_dll_info.GetDllName();
+
+	if (m_dll_info.GetDllName())
+	{
+			MessageBox(_T(LoadLanguageFromId(IDS_STRING_LIST_SUCCESS)),"",MB_OK);
+			
+	}else{
+			MessageBox(_T(LoadLanguageFromId(IDS_STRING_LIST_FAIL)),"",MB_OK);
+	}
 	
 	/*清空listbox*/
 	m_tabpage[0].m_CheckListBox.ResetContent();
@@ -792,17 +854,32 @@ void CAdapted_shellDlg::Display_Dll_Input(CString _dll_name)
 {
 	int index = 0;
 	int i = 0;
+
+//	if (_dll_name == ""){
+//		AfxMessageBox("kong");
+		
+		
+//		pDialog_input[m_dll_info.m_df_dll_info.num]->ShowWindow(SW_SHOW);
+		
+//		
+//		return;
+//	}
+
 	
 	index = Return_Index_For_Dll_Name(_dll_name);
 
 //	AfxMessageBox(_dll_name);
 
+
+
+
 	while (i < m_dll_info.m_df_dll_info.num){
 		pDialog_input[i]->ShowWindow(SW_HIDE);
 		i++;
 	}
-	
+		
 	pDialog_input[index]->ShowWindow(SW_SHOW);
+
 
 
 //	Set_Dll_Input_Dialog();
@@ -1089,6 +1166,111 @@ DWORD CAdapted_shellDlg::dstring_to_hex (const char *str)
 	return dword;
 
 }
+
+//通过语种ID返回响应的语种字符串
+CString CAdapted_shellDlg::LoadLanguageFromId(UINT lId)
+{
+	CString temp;
+
+	temp.LoadString(lId);
+
+	return temp;
+}
+
+
+
+//根据语种设置文本显示
+void CAdapted_shellDlg::__SetDlgLang(int langID)
+{
+	switch(langID) // 判断并设置当前界面语言
+	{
+	case  0:SetThreadLocale(MAKELANGID(LANG_ENGLISH,SUBLANG_ENGLISH_US));break;
+	case  1:SetThreadLocale(MAKELANGID(LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED));break;
+	default: break;
+	}
+	
+	theApp.m_curLang = langID; // 同时修改全局变量
+	
+	theApp.__SetItemText(this, IDC_BUTTON_UPDATE, IDC_BUTTON_UPDATE); // 修改按钮文字
+	theApp.__SetItemText(this, IDC_BUTTON_OPEN_FILE, IDC_BUTTON_OPEN_FILE);
+	theApp.__SetItemText(this, IDC_BUTTON_ADD_DLL, IDC_BUTTON_ADD_DLL);
+	theApp.__SetItemText(this, IDC_BUTTON_LIST_DLL, IDC_BUTTON_LIST_DLL);
+	theApp.__SetItemText(this, IDC_BUTTON_PROTECT, IDC_BUTTON_PROTECT);
+	theApp.__SetItemText(this, IDC_STATIC_LOAD_FILE, IDC_STATIC_LOAD_FILE);
+	theApp.__SetItemText(this, IDC_STATIC_OUT_FILE, IDC_STATIC_OUT_FILE);
+	theApp.__SetItemText(this, IDC_STATIC_LANGUAGES, IDC_STATIC_LANGUAGE);
+
+
+
+	CString table1 = _T("");
+	CString table2 = _T("");
+	CString table3 = _T("");
+	
+	
+	table1.LoadString(IDS_STRING_TABLE1);
+	table2.LoadString(IDS_STRING_TABLE2);
+	table3.LoadString(IDS_STRING_TABLE3);
+
+
+	TCITEM tcItem1;
+	tcItem1.mask = TCIF_TEXT;
+	tcItem1.pszText = _T((LPSTR)(LPCTSTR)table3);
+	m_tabctrl.SetItem(0,&tcItem1);
+
+	TCITEM tcItem2;
+	tcItem2.mask = TCIF_TEXT;
+	tcItem2.pszText = _T((LPSTR)(LPCTSTR)table2);
+	m_tabctrl.SetItem(1,&tcItem2);
+
+
+	TCITEM tcItem3;
+	tcItem3.mask = TCIF_TEXT;
+	tcItem3.pszText = _T((LPSTR)(LPCTSTR)table1);
+	m_tabctrl.SetItem(2,&tcItem3);
+
+
+	
+	//获取当前选中tab页索引
+	m_CurSelTab = m_tabctrl.GetCurSel();
+
+
+	//显示界面
+	pDialog[0]->ShowWindow(SW_HIDE);
+	pDialog[1]->ShowWindow(SW_HIDE);
+	pDialog[2]->ShowWindow(SW_HIDE);
+
+
+	//设置module list 语种
+	theApp.__SetItemText(pDialog[0],IDC_STATIC_MODULE_LIST,IDC_STATIC_MODULE);
+	theApp.__SetItemText(pDialog[1],IDC_STATIC_MODULE_LIST,IDC_STATIC_MODULE);
+	theApp.__SetItemText(pDialog[2],IDC_STATIC_MODULE_LIST,IDC_STATIC_MODULE);
+
+
+
+
+
+
+
+	pDialog[m_CurSelTab]->ShowWindow(SW_SHOW);
+
+
+	//显示input dlg
+	int i = 0;
+	while(i < DLL_NUM){
+		//创建dialog
+		pDialog_input[i]->ShowWindow(SW_HIDE);
+		theApp.__SetItemText(pDialog_input[i],IDC_STATIC_MODULE_PARAMETERS,IDC_STATIC_MODULE_PARAMETER);
+		theApp.__SetItemText(pDialog_input[i],IDC_STATIC_BRIEF_GROUP,IDC_STATIC_BRIEF_GROUP);
+		i++;
+	}
+	
+	
+	pDialog_input[0]->ShowWindow(SW_SHOW);
+
+
+
+}
+
 
 
 /*
@@ -1521,7 +1703,8 @@ void CAdapted_shellDlg::OnProtect()
 	/*如果没有载入数据，提示载入shell module*/
 	if (!status)
 	{
-		MessageBox("please load shell module!","warning",MB_DEFBUTTON2);
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_PLEASE_LOAD_MODULE)),"warning",MB_DEFBUTTON2);
+		return;
 	}
 
 
@@ -1535,7 +1718,8 @@ void CAdapted_shellDlg::OnProtect()
 
 
 	if (load_path == "" ){
-		MessageBox("no file in put","warning",MB_DEFBUTTON2);
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_NO_FILE_INPUT)),"warning",MB_DEFBUTTON2);
+		return;
 	}else{
 		GetDlgItemText(IDC_EDIT_OUT_FILE,out_path);
 	}
@@ -1612,10 +1796,12 @@ void CAdapted_shellDlg::OnProtect()
 	DoShell = (DOSHELL)GetProcAddress(LoadLibraryA("ShellMain.dll"),"DoShell");
 	if (DoShell == NULL)
 	{
-		printf("加载 ShellMain.dll 失败！");
+		
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_SUCCESS_LOAD_FAIL_SHELL_MAIN)),"warning",MB_DEFBUTTON2);
 		return ;
 	}else{
-		AfxMessageBox("success load shell main");
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_SUCCESS_LOAD_SHELL_MAIN)),"warning",MB_DEFBUTTON2);
+		
 	}
 
 
@@ -1624,14 +1810,35 @@ void CAdapted_shellDlg::OnProtect()
 	Ret = DoShell((LPSTR)(LPCTSTR)load_path,(LPSTR)(LPCTSTR)out_path,dll_select_sum,dll_info);
 	if (Ret)
 	{
-		AfxMessageBox("OK");
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_PROTECT_FINISH)),"warning",MB_DEFBUTTON2);
 	}
 	else
 	{
-		AfxMessageBox("ERROR");
+		MessageBox(_T(LoadLanguageFromId(IDS_STRING_PROTECT_FINISH_ERROR)),"warning",MB_DEFBUTTON2);
 	}
 
 	
 
+	
+}
+
+//响应语种
+void CAdapted_shellDlg::OnSelchangeComboLanguageList() 
+{
+	// TODO: Add your control notification handler code here
+	
+	__SetDlgLang(m_language_list.GetCurSel());
+
+
+
+
+
+//	::GetTabControl()
+	
+}
+
+void CAdapted_shellDlg::OnButtonListDll() 
+{
+	// TODO: Add your control notification handler code here
 	
 }

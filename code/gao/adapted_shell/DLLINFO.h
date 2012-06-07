@@ -121,6 +121,10 @@ public:
 	int    GetDllName(void);
 	int    GetDLLInformation(void);
 	int    GetIndexFromDllName(char _dll_name[DLL_NUM]);
+
+	//通过语种ID返回响应的语种字符串
+	CString LoadLanguageFromId(UINT lId);
+
 	virtual ~DLLINFO();
 
 public:

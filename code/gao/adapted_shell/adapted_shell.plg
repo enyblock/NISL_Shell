@@ -6,6 +6,22 @@
 --------------------Configuration: adapted_shell - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Debug/adapted_shell.res" /d "_DEBUG" /d "_AFXDLL" "C:\Documents and Settings\Administrator\×ÀÃæ\adapted_shell\adapted_shell.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP41E.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/adapted_shell.pdb" /debug /machine:I386 /out:"Debug/adapted_shell.exe" /pdbtype:sept 
+".\Debug\adapted_shell.obj"
+".\Debug\adapted_shellDlg.obj"
+".\Debug\DLLINFO.obj"
+".\Debug\DllInput.obj"
+".\Debug\StdAfx.obj"
+".\Debug\TabPage1.obj"
+".\Debug\adapted_shell.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP41E.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Linking...
 
 
 

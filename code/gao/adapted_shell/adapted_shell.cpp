@@ -27,6 +27,7 @@ CAdapted_shellApp::CAdapted_shellApp()
 {
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
+	m_curLang = 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -66,7 +67,22 @@ BOOL CAdapted_shellApp::InitInstance()
 		//  dismissed with Cancel
 	}
 
+
+
 	// Since the dialog has been closed, return FALSE so that we exit the
 	//  application, rather than start the application's message pump.
 	return FALSE;
+}
+
+
+//设置文本
+bool CAdapted_shellApp::__SetItemText(CDialog *pDlg, int itemID, int stringID)
+{
+	CString s;
+	
+	if(!s.LoadString(stringID)) 
+		return false; // 从资源文件取字符串
+	
+	pDlg->GetDlgItem(itemID)->SetWindowText(s); // 设置控件文字　  
+	return true;
 }

@@ -171,6 +171,10 @@ SOURCE=.\res\adapted_shell.rc2
 # End Source File
 # Begin Source File
 
+SOURCE=.\cursor1.cur
+# End Source File
+# Begin Source File
+
 SOURCE=.\self_upd.bin
 # End Source File
 # End Group

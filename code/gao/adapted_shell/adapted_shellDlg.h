@@ -24,6 +24,7 @@ class CAdapted_shellDlg : public CDialog
 // Construction
 public:
 	CAdapted_shellDlg(CWnd* pParent = NULL);	// standard constructor
+	void __SetDlgLang(int langID);
 	bool Download(const CString& strFileURLInServer, const CString & strFileLocalFullPath);//存放到本地的路径 
 	BOOL PreTranslateMessage(MSG* pMsg);
 	void Display_Dll_Input(CString _dll_name);
@@ -33,11 +34,14 @@ public:
 	int  Show_Edit_And_Static(int limit,int i);
 	int  Set_Parameters_From_Dll_Input_Dialog(int limit,int i);
 	DWORD dstring_to_hex (const char *str);
+
+	//通过语种ID返回响应的语种字符串
+	CString LoadLanguageFromId(UINT lId);
 	
     // Dialog Data
 	//{{AFX_DATA(CAdapted_shellDlg)
 	enum { IDD = IDD_ADAPTED_SHELL_DIALOG };
-
+	CComboBox	m_language_list;
 	//}}AFX_DATA
 
 	/*tab control*/
@@ -81,6 +85,8 @@ protected:
 	afx_msg void OnSelchangeTab1(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnListDll();
 	afx_msg void OnProtect();
+	afx_msg void OnSelchangeComboLanguageList();
+	afx_msg void OnButtonListDll();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };
